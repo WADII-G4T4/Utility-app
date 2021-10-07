@@ -11,57 +11,58 @@ const Maps = () => import(/* webpackChunkName: "common" */ "@/pages/Maps.vue");
 const Typography = () => import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
 const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
 const Login = () => import(/* webpackChunkName: "common" */ "@/pages/Login.vue");
+const Register = () => import(/* webpackChunkName: "common" */ "@/pages/Register.vue");
 
 const routes = [
   {
     path: "/",
-    component: DashboardLayout,
-    redirect: "/dashboard",
-    children: [
-      
-      {
-        path: "dashboard",
-        name: "dashboard",
-        component: Dashboard
-      },
-      {
-        path: "profile",
-        name: "profile",
-        component: Profile
-      },
-      {
-        path: "notifications",
-        name: "notifications",
-        component: Notifications
-      },
-      {
-        path: "icons",
-        name: "icons",
-        component: Icons
-      },
-      {
-        path: "maps",
-        name: "maps",
-        component: Maps
-      },
-      {
-        path: "typography",
-        name: "typography",
-        component: Typography
-      },
-      {
-        path: "table-list",
-        name: "table-list",
-        component: TableList
-      }
-    ]
+    name: "login",
+    component: Login,
+    
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
+    
+  },
+  {
+    path: "dashboard",
+    name: "dashboard",
+    component: Dashboard
+  },
+  {
+    path: "profile",
+    name: "profile",
+    component: Profile
+  },
+  {
+    path: "notifications",
+    name: "notifications",
+    component: Notifications
+  },
+  {
+    path: "icons",
+    name: "icons",
+    component: Icons
+  },
+  {
+    path: "maps",
+    name: "maps",
+    component: Maps
+  },
+  {
+    path: "typography",
+    name: "typography",
+    component: Typography
+  },
+  {
+    path: "table-list",
+    name: "table-list",
+    component: TableList
   },
   { path: "*", component: NotFound },
-  {
-    path: "/login",
-    name: "login",
-    component: Login
-  },
+  
 ];
 
 /**

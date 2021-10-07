@@ -16,7 +16,7 @@
 
         <a href="#" class="btn btn-primary mb-3">Login</a>
         <div class="card-text">
-            <u>Haven't made an account? Register here</u>
+            <u><router-link to="/register">Haven't made an account? Register here</router-link></u>
         </div>
       </div>
     </card>
@@ -28,7 +28,12 @@ import Card from "../components/Cards/Card.vue";
 export default {
   components: {
     Card
-  }
+  },
+  methods:{
+    register(){
+      $route
+    }
+  }  
 };
 </script>
 
