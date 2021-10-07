@@ -7,4 +7,4 @@ const dataSchema = mongoose.Schema({
     reminder: {type: String, required: true},
 })
 
-module.exports = mongoose.model("Todo", todoSchema)
+module.exports = mongoose.model("data", todoSchema)

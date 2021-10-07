@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import API from './api/API'
   export default {
     methods: {
       disableRTL() {
@@ -18,9 +19,16 @@
         root.classList.toggle('nav-open');
       }
     },
-    mounted() {
+    async mounted() {
       this.$watch('$route', this.disableRTL, { immediate: true });
       this.$watch('$sidebar.showSidebar', this.toggleNavOpen)
+      try {
+        const res = await API.token;
+
+      } catch(err){
+        window.localStorage.clear()
+        this.$router.push("/")
+      }
     }
   };
 </script>

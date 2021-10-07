@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
                 if (err) {
                     return res.status(403).json({ message: "Token expired"})
                 } else {
-                    return res.status(200)
+                    return res.status(200).json({message: "Correct User"})
                 }
                 
             });
