@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const db = require("../database");
 const auth = require("../middleware/auth.js");
-const Todo = require("../models/todo.js");
+const Tips = require("../models/tips.js");
 
 const router = Router();
 router.use(auth);
@@ -9,6 +9,18 @@ router.get("/", async (req, res) => {
   const { userId } = req.body;
   try {
     const result = await Todo.find({ "userId" : userId });
+    console.log(result)
+
+    res.status(200).send(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/tips", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const result = await Tips.find({ "userId" : userId });
     console.log(result)
 
     res.status(200).send(result);

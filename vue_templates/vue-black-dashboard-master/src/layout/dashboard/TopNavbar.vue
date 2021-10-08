@@ -85,14 +85,11 @@
                 </p>
               </a>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Profile</a>
-              </li>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Settings</a>
+                <a href="#" class="nav-item dropdown-item" @click="redirect">Profile</a>
               </li>
               <div class="dropdown-divider"></div>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Log out</a>
+                <a href="#" class="nav-item dropdown-item" @click="logout">Log out</a>
               </li>
             </base-dropdown>
           </ul>
@@ -146,6 +143,13 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      },
+      redirect(){
+        this.$router.push("/home/profile")
+      },
+      logout(){
+        window.localStorage.clear();
+        this.$router.push("/")
       }
     }
   };

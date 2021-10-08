@@ -23,7 +23,8 @@ import API from './api/API'
       this.$watch('$route', this.disableRTL, { immediate: true });
       this.$watch('$sidebar.showSidebar', this.toggleNavOpen)
       try {
-        const res = await API.token;
+        const token = window.localStorage.getItem("token");
+        const res = await API.token(token);
 
       } catch(err){
         window.localStorage.clear()

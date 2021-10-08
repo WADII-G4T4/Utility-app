@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors')
 const mongoose = require("mongoose");
 
-/* const addRoute = require('./routes/add') */
+const addRoute = require('./routes/add')
 /* const delRoute = require('./routes/delete'); */
-/* const findRoute = require('./routes/find') */
+const findRoute = require('./routes/find')
 /* const updateRoute = require('./routes/update'); */
 const usersRoute = require('./routes/users');
 const authRoute = require("./routes/middleware")
@@ -24,6 +24,8 @@ app.use((req, res, next)=>{
 app.use('/delete', delRoute)
 app.use('/find', findRoute)
 app.use('/update', updateRoute) */
+app.use('/find', findRoute)
+app.use('/add', addRoute)
 app.use('/users', usersRoute)
 app.use('/auth', authRoute)
 
