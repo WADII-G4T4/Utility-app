@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const addRoute = require('./routes/add')
 /* const delRoute = require('./routes/delete'); */
 const findRoute = require('./routes/find')
-/* const updateRoute = require('./routes/update'); */
+const updateRoute = require('./routes/update')
 const usersRoute = require('./routes/users');
 const authRoute = require("./routes/middleware")
 
@@ -28,6 +28,7 @@ app.use('/find', findRoute)
 app.use('/add', addRoute)
 app.use('/users', usersRoute)
 app.use('/auth', authRoute)
+app.use('/update', updateRoute)
 
 const url = require("./database").url
 mongoose.connect(url, {useUnifiedTopology: true,  useNewUrlParser: true});

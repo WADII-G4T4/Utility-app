@@ -2,6 +2,7 @@ const { Router } = require("express");
 const db = require("../database");
 const auth = require("../middleware/auth.js");
 const Tips = require("../models/tips.js");
+const User = require("../models/user.js");
 
 const router = Router();
 router.use(auth);
@@ -26,6 +27,19 @@ router.get("/tips", async (req, res) => {
     res.status(200).send(result);
   } catch (err) {
     console.log(err);
+  }
+});
+
+router.get("/profile", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    
+    const result = await User.find({ "_id" : userId });
+    console.log(result)
+
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(500).json({message: "Something went wrong"});
   }
 });
 

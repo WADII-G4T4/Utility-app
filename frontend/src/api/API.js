@@ -36,9 +36,16 @@ API.updateTask = async (data, token)=>{
     return await axios.post(`${origin}/update`, data, setHeader(token));
 } */
 
+API.updateProfile = async (data, token)=>{
+    return await axios.post(`${origin}/update/profile`, data, setHeader(token));
+}
 
 API.addTip = async (data, token)=>{
     return await axios.post(`${origin}/add/tips`, data, setHeader(token));
+}
+
+API.findProfile = async (token)=>{
+    return await axios.get(`${origin}/find/profile`, setHeader(token));
 }
 
 API.findTip = async (token)=>{

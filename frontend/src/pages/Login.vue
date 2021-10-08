@@ -16,6 +16,7 @@
 
         <a href="#" class="btn btn-primary mb-3" @click="login">Login</a>
         <div class="card-text">
+          <p v-if="error">You have entered an incorrect email/password. Please try again.</p>
             <u><router-link to="/register">Haven't made an account? Register here</router-link></u>
         </div>
       </div>
@@ -33,7 +34,8 @@ export default {
   data(){
     return {
       email: null,
-      password: null
+      password: null,
+      error: false
     }
   },
   methods:{
@@ -49,7 +51,7 @@ export default {
         window.localStorage.setItem("token", token);
         this.$router.push("/home/dashboard")
       } catch (error) {
-        console.log(error)
+        this.error = true;
       }
     }
   }  
