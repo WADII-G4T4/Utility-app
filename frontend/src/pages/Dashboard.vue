@@ -150,61 +150,54 @@
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
+              {{ $t("dashboard.electricityBreakdown") }}
             </h3>
           </template>
           <div class="chart-area">
-            <line-chart
+            <doughnut-chart
               style="height: 100%"
-              chart-id="purple-line-chart"
-              :chart-data="purpleLineChart.chartData"
-              :gradient-colors="purpleLineChart.gradientColors"
-              :gradient-stops="purpleLineChart.gradientStops"
-              :extra-options="purpleLineChart.extraOptions"
+              chart-id="doughnut-chart"
+              :chart-data="doughnutChart.chartData"
+              :extra-options="doughnutChart.extraOptions"
             >
-            </line-chart>
+            </doughnut-chart>
           </div>
         </card>
       </div>
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.dailySales") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-delivery-fast text-info"></i> 3,500€
+              {{ $t("dashboard.waterBreakdown") }}
             </h3>
           </template>
           <div class="chart-area">
-            <bar-chart
+            <doughnut-chart
               style="height: 100%"
-              chart-id="blue-bar-chart"
-              :chart-data="blueBarChart.chartData"
-              :gradient-stops="blueBarChart.gradientStops"
-              :extra-options="blueBarChart.extraOptions"
+              chart-id="doughnut-chart"
+              :chart-data="doughnutChart.chartData"
+              :extra-options="doughnutChart.extraOptions"
             >
-            </bar-chart>
+            </doughnut-chart>
           </div>
         </card>
       </div>
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.completedTasks") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-send text-success"></i> 12,100K
+              {{ $t("dashboard.gasBreakdown") }}
             </h3>
           </template>
           <div class="chart-area">
-            <line-chart
+            <doughnut-chart
               style="height: 100%"
-              chart-id="green-line-chart"
-              :chart-data="greenLineChart.chartData"
-              :gradient-stops="greenLineChart.gradientStops"
-              :extra-options="greenLineChart.extraOptions"
+              chart-id="doughnut-chart"
+              :chart-data="doughnutChart.chartData"
+              :extra-options="doughnutChart.extraOptions"
             >
-            </line-chart>
+            </doughnut-chart>
           </div>
         </card>
       </div>
@@ -257,6 +250,7 @@
 <script>
 import LineChart from "@/components/Charts/LineChart";
 import BarChart from "@/components/Charts/BarChart";
+import DoughnutChart from "@/components/Charts/DoughnutChart"
 import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
@@ -268,9 +262,29 @@ export default {
     BarChart,
     TaskList,
     UserTable,
+    DoughnutChart
   },
   data() {
     return {
+      doughnutChart:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Aircon", "Fridge", "TV", "Fan & Lights", "Others"],
+          datasets: [
+            {
+              label: "Electricity",
+              data: [40, 30, 15, 10, 5],
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 205, 86)'
+              ]
+            },
+          ],
+        },
+      },
       bigLineChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],

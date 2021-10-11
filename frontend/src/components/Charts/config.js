@@ -6,6 +6,14 @@ export const basicOptions = {
   },
   responsive: true,
 };
+
+export const advancedOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: true
+  },
+  responsive: true,
+}
 export let blueChartOptions = {
   ...basicOptions,
   tooltips: {
@@ -46,6 +54,20 @@ export let blueChartOptions = {
         fontColor: "#2380f7"
       }
     }]
+  }
+}
+
+export let doughnutChartOptions = {
+  ...advancedOptions,
+  tooltips: {
+    backgroundColor: '#f5f5f5',
+    titleFontColor: '#333',
+    bodyFontColor: '#666',
+    bodySpacing: 4,
+    xPadding: 12,
+    mode: "nearest",
+    intersect: 0,
+    position: "nearest"
   }
 }
 

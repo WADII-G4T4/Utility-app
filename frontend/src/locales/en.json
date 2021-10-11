@@ -5,6 +5,9 @@
     "performance": "Performance",
     "simpleTable": "Simple Table",
     "totalShipments": "Total Shipments",
+    "electricityBreakdown" : "Electricity Breakdown",
+    "waterBreakdown" : "Water Breakdown",
+    "gasBreakdown" : "Gas Breakdown",
     "chartCategories": [
       "Accounts",
       "Purchases",
