@@ -20,7 +20,7 @@ export default {
         return val.length > 2;
       }
     }
-  },
+  },  
   data() {
     return {
       ctx: null

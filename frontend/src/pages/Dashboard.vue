@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="tim-icons icon-money-coins text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 1</p>
-                  Sub metric
+                  <p>Outstanding Bill</p>
+                  <h3 style="margin-bottom:0px">$120.45</h3>
                 </div>
               </div>
             </div>
@@ -24,19 +24,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-bolt text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 2</p>
-                  Sub metric
+                  <p>Electricity Consumption</p>
+                  <h3 style="margin-bottom:0px">362 KWh</h3>
                 </div>
               </div>
             </div>
@@ -47,19 +47,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-tint text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 3</p>
-                  Sub metric
+                  <p>Water Consumption</p>
+                  <h3 style="margin-bottom:0px">53.8 L</h3>
                 </div>
               </div>
             </div>
@@ -70,19 +70,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-burn text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 4</p>
-                  Sub metric
+                  <p>Gas Consumption</p>
+                  <h3 style="margin-bottom:0px">91,201 BTU</h3>
                 </div>
               </div>
             </div>
@@ -99,23 +99,19 @@
         <card type="chart">
           <template slot="header">
             <div class="row">
-              <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
-                <h5 class="card-category">
-                  {{ $t("dashboard.totalShipments") }}
-                </h5>
-                <h2 class="card-title">{{ $t("dashboard.performance") }}</h2>
+              <div class="col-sm-6 text-left">
+                <h2 class="card-title">{{ $t("dashboard.monthlyConsumption") }}</h2>
               </div>
               <div class="col-sm-6">
                 <div
-                  class="btn-group btn-group-toggle"
-                  :class="isRTL ? 'float-left' : 'float-right'"
+                  class="btn-group btn-group-toggle float-right"
                   data-toggle="buttons"
                 >
                   <label
-                    v-for="(option, index) in bigLineChartCategories"
+                    v-for="(option, index) in bigBarChartCategories"
                     :key="option"
                     class="btn btn-sm btn-primary btn-simple"
-                    :class="{ active: bigLineChart.activeIndex === index }"
+                    :class="{ active: bigBarChart.activeIndex === index }"
                     :id="index"
                   >
                     <input
@@ -123,7 +119,7 @@
                       @click="initBigChart(index)"
                       name="options"
                       autocomplete="off"
-                      :checked="bigLineChart.activeIndex === index"
+                      :checked="bigBarChart.activeIndex === index"
                     />
                     {{ option }}
                   </label>
@@ -132,25 +128,26 @@
             </div>
           </template>
           <div class="chart-area">
-            <line-chart
+            <bar-chart
               style="height: 100%"
               ref="bigChart"
-              chart-id="big-line-chart"
-              :chart-data="bigLineChart.chartData"
-              :gradient-colors="bigLineChart.gradientColors"
-              :gradient-stops="bigLineChart.gradientStops"
-              :extra-options="bigLineChart.extraOptions"
+              chart-id="big-bar-chart"
+              :chart-data="bigBarChart.chartData"
+              :gradient-colors="bigBarChart.gradientColors"
+              :gradient-stops="bigBarChart.gradientStops"
+              :extra-options="bigBarChart.extraOptions"
             >
-            </line-chart>
+            </bar-chart>
           </div>
         </card>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-lg-4" id="elecBreak">
         <card type="chart">
           <template slot="header">
             <h3 class="card-title">
+              <i class="fas fa-bolt text-success" style="font-size: 20px;"></i>
               {{ $t("dashboard.electricityBreakdown") }}
             </h3>
           </template>
@@ -158,17 +155,18 @@
             <doughnut-chart
               style="height: 100%"
               chart-id="doughnut-chart"
-              :chart-data="doughnutChart.chartData"
-              :extra-options="doughnutChart.extraOptions"
+              :chart-data="electricityDoughnut.chartData"
+              :extra-options="electricityDoughnut.extraOptions"
             >
             </doughnut-chart>
           </div>
         </card>
       </div>
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-lg-4" id="waterBreak">
         <card type="chart">
           <template slot="header">
             <h3 class="card-title">
+              <i class="fas fa-tint text-success" style="font-size: 20px;"></i>
               {{ $t("dashboard.waterBreakdown") }}
             </h3>
           </template>
@@ -176,17 +174,18 @@
             <doughnut-chart
               style="height: 100%"
               chart-id="doughnut-chart"
-              :chart-data="doughnutChart.chartData"
-              :extra-options="doughnutChart.extraOptions"
+              :chart-data="waterDoughnut.chartData"
+              :extra-options="waterDoughnut.extraOptions"
             >
             </doughnut-chart>
           </div>
         </card>
       </div>
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-lg-4" id="gasBreak">
         <card type="chart">
           <template slot="header">
             <h3 class="card-title">
+              <i class="fas fa-burn text-success" style="font-size: 20px;"></i>
               {{ $t("dashboard.gasBreakdown") }}
             </h3>
           </template>
@@ -194,53 +193,10 @@
             <doughnut-chart
               style="height: 100%"
               chart-id="doughnut-chart"
-              :chart-data="doughnutChart.chartData"
-              :extra-options="doughnutChart.extraOptions"
+              :chart-data="gasDoughnut.chartData"
+              :extra-options="gasDoughnut.extraOptions"
             >
             </doughnut-chart>
-          </div>
-        </card>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <card type="tasks" :header-classes="{ 'text-right': isRTL }">
-          <template slot="header">
-            <h6 class="title d-inline">
-              {{ $t("dashboard.tasks", { count: 5 }) }}
-            </h6>
-            <p class="card-category d-inline">{{ $t("dashboard.today") }}</p>
-            <base-dropdown
-              menu-on-right=""
-              tag="div"
-              title-classes="btn btn-link btn-icon"
-              aria-label="Settings menu"
-              :class="{ 'float-left': isRTL }"
-            >
-              <i slot="title" class="tim-icons icon-settings-gear-63"></i>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.action")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.anotherAction")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.somethingElse")
-              }}</a>
-            </base-dropdown>
-          </template>
-          <div class="table-full-width table-responsive">
-            <task-list></task-list>
-          </div>
-        </card>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <card class="card" :header-classes="{ 'text-right': isRTL }">
-          <h4 slot="header" class="card-title">
-            {{ $t("dashboard.simpleTable") }}
-          </h4>
-          <div class="table-responsive">
-            <user-table></user-table>
           </div>
         </card>
       </div>
@@ -266,7 +222,7 @@ export default {
   },
   data() {
     return {
-      doughnutChart:{
+      electricityDoughnut:{
         extraOptions: chartConfigs.doughnutChartOptions,
         chartData: {
           labels: ["Aircon", "Fridge", "TV", "Fan & Lights", "Others"],
@@ -275,17 +231,52 @@ export default {
               label: "Electricity",
               data: [40, 30, 15, 10, 5],
               backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(255, 205, 86)',
-                'rgb(255, 205, 86)'
+                'rgb(191, 236, 221)',
+                'rgb(118, 232, 194)',
+                'rgb(85, 105, 98)',
+                'rgb(92, 181, 151)',
+                'rgb(36, 71, 60)'
               ]
             },
           ],
         },
       },
-      bigLineChart: {
+      waterDoughnut:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Common", "Master", "Washing Machine" ,"Kitchen"],
+          datasets: [
+            {
+              label: "Water",
+              data: [45, 30, 15, 10],
+              backgroundColor: [
+                'rgb(31, 43, 133)',
+                'rgb(18, 25, 79)',
+                'rgb(111, 122, 209)',
+                'rgb(81, 89, 153)'
+              ]
+            },
+          ],
+        },
+      },
+      gasDoughnut:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Stove 1", "Stove 2", "Stove 3"],
+          datasets: [
+            {
+              label: "Gas",
+              data: [40, 30, 30],
+              backgroundColor: [
+                'rgb(107, 32, 132)',
+                'rgb(64, 19, 79)',
+                'rgb(185, 113, 209)'
+              ]
+            },
+          ],
+        },
+      },
+      bigBarChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
           [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -309,7 +300,7 @@ export default {
             "DEC",
           ],
         },
-        extraOptions: chartConfigs.purpleChartOptions,
+        extraOptions: chartConfigs.bigBarChartOptions,
         gradientColors: config.colors.primaryGradient,
         gradientStops: [1, 0.4, 0],
         categories: [],
@@ -398,7 +389,7 @@ export default {
     isRTL() {
       return this.$rtl.isRTL;
     },
-    bigLineChartCategories() {
+    bigBarChartCategories() {
       return this.$t("dashboard.chartCategories");
     },
   },
@@ -419,7 +410,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.bigLineChart.allData[index],
+            data: this.bigBarChart.allData[index],
           },
         ],
         labels: [
@@ -438,24 +429,15 @@ export default {
         ],
       };
       this.$refs.bigChart.updateGradients(chartData);
-      this.bigLineChart.chartData = chartData;
-      this.bigLineChart.activeIndex = index;
+      this.bigBarChart.chartData = chartData;
+      this.bigBarChart.activeIndex = index;
     },
   },
   mounted() {
     this.i18n = this.$i18n;
-    if (this.enableRTL) {
-      this.i18n.locale = "ar";
-      this.$rtl.enableRTL();
-    }
+    this.i18n.locale = "en";
     this.initBigChart(0);
-  },
-  beforeDestroy() {
-    if (this.$rtl.isRTL) {
-      this.i18n.locale = "en";
-      this.$rtl.disableRTL();
-    }
-  },
+  }
 };
 </script>
 <style>
