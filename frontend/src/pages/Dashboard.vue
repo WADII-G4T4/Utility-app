@@ -5,21 +5,25 @@
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
                   <i class="tim-icons icon-money-coins text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
-                  <p>Outstanding Bill</p>
-                  <h3 style="margin-bottom:0px">$120.45</h3>
+                  <p>Outstanding Bill ({{billMonth}})</p>
+                  <h3 style="margin-bottom:0px">{{billAmount}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="calBill">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
@@ -28,21 +32,25 @@
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
                   <i class="fas fa-bolt text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
                   <p>Electricity Consumption</p>
-                  <h3 style="margin-bottom:0px">362 KWh</h3>
+                  <h3 style="margin-bottom:0px">{{kpi1}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats" >
+                <a @click="elecKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
@@ -51,21 +59,25 @@
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
                   <i class="fas fa-tint text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
                   <p>Water Consumption</p>
-                  <h3 style="margin-bottom:0px">53.8 L</h3>
+                  <h3 style="margin-bottom:0px">{{kpi2}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="waterKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
@@ -74,21 +86,25 @@
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
                   <i class="fas fa-burn text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
                   <p>Gas Consumption</p>
-                  <h3 style="margin-bottom:0px">91,201 BTU</h3>
+                  <h3 style="margin-bottom:0px">{{kpi3}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="gasKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
@@ -222,6 +238,11 @@ export default {
   },
   data() {
     return {
+      billMonth:"",
+      billAmount:"",
+      kpi1:"",
+      kpi2:"",
+      kpi3:"",
       electricityDoughnut:{
         extraOptions: chartConfigs.doughnutChartOptions,
         chartData: {
@@ -236,7 +257,8 @@ export default {
                 'rgb(85, 105, 98)',
                 'rgb(92, 181, 151)',
                 'rgb(36, 71, 60)'
-              ]
+              ],
+              fontColor: "fff",
             },
           ],
         },
@@ -257,7 +279,7 @@ export default {
               ]
             },
           ],
-        },
+        }
       },
       gasDoughnut:{
         extraOptions: chartConfigs.doughnutChartOptions,
@@ -432,11 +454,41 @@ export default {
       this.bigBarChart.chartData = chartData;
       this.bigBarChart.activeIndex = index;
     },
+    getBillMonth(){
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var d = new Date();
+      this.billMonth = monthNames[d.getMonth()-1] 
+    },
+    calBill(){
+      var bill_list = [120.45, 160.23, 189.21, 100.29, 219.91];
+      var random =  Math.floor(Math.random() * bill_list.length);
+      this.billAmount = "$" + bill_list[random];
+    },
+    elecKPI() {
+      var elec_list = [423, 467, 541, 392, 453];
+      var random =  Math.floor(Math.random() * elec_list.length);
+      this.kpi1 = elec_list[random] + " kWh";
+    },
+    waterKPI() {
+      var water_list = [4230, 4670, 5410, 3920, 4530];
+      var random =  Math.floor(Math.random() * water_list.length);
+      this.kpi2 = water_list[random] + " L";
+    },
+    gasKPI() {
+      var gas_list = [270123, 284032, 210203, 252123, 192830];
+      var random =  Math.floor(Math.random() * gas_list.length);
+      this.kpi3 = gas_list[random].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " BTU";
+    }
   },
   mounted() {
     this.i18n = this.$i18n;
     this.i18n.locale = "en";
     this.initBigChart(0);
+    this.getBillMonth();
+    this.calBill();
+    this.elecKPI();
+    this.waterKPI();
+    this.gasKPI();
   }
 };
 </script>

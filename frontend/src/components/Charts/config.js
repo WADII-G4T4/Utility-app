@@ -68,7 +68,12 @@ export let doughnutChartOptions = {
     mode: "nearest",
     intersect: 0,
     position: "nearest"
-  }
+  },
+  legend: {
+    labels: {
+        fontColor: "white"
+    }
+  },
 }
 
 export let bigBarChartOptions = {
