@@ -41,7 +41,7 @@
     props: {
       title: {
         type: String,
-        default: "Utility Tracking"
+        default: "UT Buddy"
       },
       backgroundColor: {
         type: String,

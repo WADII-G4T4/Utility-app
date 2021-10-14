@@ -1,94 +1,110 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="tim-icons icon-money-coins text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
-                  <p>KPI 1</p>
-                  Sub metric
+                  <p>Outstanding Bill ({{billMonth}})</p>
+                  <h3 style="margin-bottom:0px">{{billAmount}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="calBill">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-bolt text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
-                  <p>KPI 2</p>
-                  Sub metric
+                  <p>Electricity Consumption</p>
+                  <h3 style="margin-bottom:0px">{{kpi1}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats" >
+                <a @click="elecKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-tint text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
-                  <p>KPI 3</p>
-                  Sub metric
+                  <p>Water Consumption</p>
+                  <h3 style="margin-bottom:0px">{{kpi2}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="waterKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg">
         <card class="card-body">
           <div>
             <div class="row">
-              <div class="col-5">
+              <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="fas fa-burn text-success" style="font-size: 40px;"></i>
                 </div>
               </div>
-              <div class="col-7">
+              <div class="col-9">
                 <div class="numbers">
-                  <p>KPI 4</p>
-                  Sub metric
+                  <p>Gas Consumption</p>
+                  <h3 style="margin-bottom:0px">{{kpi3}}</h3>
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+                <a @click="gasKPI">
+                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                </a>
+              </div>
             </div>
           </div>
         </card>
@@ -99,23 +115,19 @@
         <card type="chart">
           <template slot="header">
             <div class="row">
-              <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
-                <h5 class="card-category">
-                  {{ $t("dashboard.totalShipments") }}
-                </h5>
-                <h2 class="card-title">{{ $t("dashboard.performance") }}</h2>
+              <div class="col-sm-6 text-left">
+                <h2 class="card-title">{{ $t("dashboard.monthlyConsumption") }}</h2>
               </div>
               <div class="col-sm-6">
                 <div
-                  class="btn-group btn-group-toggle"
-                  :class="isRTL ? 'float-left' : 'float-right'"
+                  class="btn-group btn-group-toggle float-right"
                   data-toggle="buttons"
                 >
                   <label
-                    v-for="(option, index) in bigLineChartCategories"
+                    v-for="(option, index) in bigBarChartCategories"
                     :key="option"
                     class="btn btn-sm btn-primary btn-simple"
-                    :class="{ active: bigLineChart.activeIndex === index }"
+                    :class="{ active: bigBarChart.activeIndex === index }"
                     :id="index"
                   >
                     <input
@@ -123,7 +135,7 @@
                       @click="initBigChart(index)"
                       name="options"
                       autocomplete="off"
-                      :checked="bigLineChart.activeIndex === index"
+                      :checked="bigBarChart.activeIndex === index"
                     />
                     {{ option }}
                   </label>
@@ -132,122 +144,75 @@
             </div>
           </template>
           <div class="chart-area">
-            <line-chart
-              style="height: 100%"
-              ref="bigChart"
-              chart-id="big-line-chart"
-              :chart-data="bigLineChart.chartData"
-              :gradient-colors="bigLineChart.gradientColors"
-              :gradient-stops="bigLineChart.gradientStops"
-              :extra-options="bigLineChart.extraOptions"
-            >
-            </line-chart>
-          </div>
-        </card>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
-        <card type="chart">
-          <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
-            <h3 class="card-title">
-              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
-            </h3>
-          </template>
-          <div class="chart-area">
-            <line-chart
-              style="height: 100%"
-              chart-id="purple-line-chart"
-              :chart-data="purpleLineChart.chartData"
-              :gradient-colors="purpleLineChart.gradientColors"
-              :gradient-stops="purpleLineChart.gradientStops"
-              :extra-options="purpleLineChart.extraOptions"
-            >
-            </line-chart>
-          </div>
-        </card>
-      </div>
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
-        <card type="chart">
-          <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.dailySales") }}</h5>
-            <h3 class="card-title">
-              <i class="tim-icons icon-delivery-fast text-info"></i> 3,500€
-            </h3>
-          </template>
-          <div class="chart-area">
             <bar-chart
               style="height: 100%"
-              chart-id="blue-bar-chart"
-              :chart-data="blueBarChart.chartData"
-              :gradient-stops="blueBarChart.gradientStops"
-              :extra-options="blueBarChart.extraOptions"
+              ref="bigChart"
+              chart-id="big-bar-chart"
+              :chart-data="bigBarChart.chartData"
+              :gradient-colors="bigBarChart.gradientColors"
+              :gradient-stops="bigBarChart.gradientStops"
+              :extra-options="bigBarChart.extraOptions"
             >
             </bar-chart>
           </div>
         </card>
       </div>
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+    </div>
+    <div class="row">
+      <div class="col-lg-4" id="elecBreak">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.completedTasks") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-send text-success"></i> 12,100K
+              <i class="fas fa-bolt text-success" style="font-size: 20px;"></i>
+              {{ $t("dashboard.electricityBreakdown") }}
             </h3>
           </template>
           <div class="chart-area">
-            <line-chart
+            <doughnut-chart
               style="height: 100%"
-              chart-id="green-line-chart"
-              :chart-data="greenLineChart.chartData"
-              :gradient-stops="greenLineChart.gradientStops"
-              :extra-options="greenLineChart.extraOptions"
+              chart-id="doughnut-chart"
+              :chart-data="electricityDoughnut.chartData"
+              :extra-options="electricityDoughnut.extraOptions"
             >
-            </line-chart>
+            </doughnut-chart>
           </div>
         </card>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <card type="tasks" :header-classes="{ 'text-right': isRTL }">
+      <div class="col-lg-4" id="waterBreak">
+        <card type="chart">
           <template slot="header">
-            <h6 class="title d-inline">
-              {{ $t("dashboard.tasks", { count: 5 }) }}
-            </h6>
-            <p class="card-category d-inline">{{ $t("dashboard.today") }}</p>
-            <base-dropdown
-              menu-on-right=""
-              tag="div"
-              title-classes="btn btn-link btn-icon"
-              aria-label="Settings menu"
-              :class="{ 'float-left': isRTL }"
-            >
-              <i slot="title" class="tim-icons icon-settings-gear-63"></i>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.action")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.anotherAction")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.somethingElse")
-              }}</a>
-            </base-dropdown>
+            <h3 class="card-title">
+              <i class="fas fa-tint text-success" style="font-size: 20px;"></i>
+              {{ $t("dashboard.waterBreakdown") }}
+            </h3>
           </template>
-          <div class="table-full-width table-responsive">
-            <task-list></task-list>
+          <div class="chart-area">
+            <doughnut-chart
+              style="height: 100%"
+              chart-id="doughnut-chart"
+              :chart-data="waterDoughnut.chartData"
+              :extra-options="waterDoughnut.extraOptions"
+            >
+            </doughnut-chart>
           </div>
         </card>
       </div>
-      <div class="col-lg-6 col-md-12">
-        <card class="card" :header-classes="{ 'text-right': isRTL }">
-          <h4 slot="header" class="card-title">
-            {{ $t("dashboard.simpleTable") }}
-          </h4>
-          <div class="table-responsive">
-            <user-table></user-table>
+      <div class="col-lg-4" id="gasBreak">
+        <card type="chart">
+          <template slot="header">
+            <h3 class="card-title">
+              <i class="fas fa-burn text-success" style="font-size: 20px;"></i>
+              {{ $t("dashboard.gasBreakdown") }}
+            </h3>
+          </template>
+          <div class="chart-area">
+            <doughnut-chart
+              style="height: 100%"
+              chart-id="doughnut-chart"
+              :chart-data="gasDoughnut.chartData"
+              :extra-options="gasDoughnut.extraOptions"
+            >
+            </doughnut-chart>
           </div>
         </card>
       </div>
@@ -257,6 +222,7 @@
 <script>
 import LineChart from "@/components/Charts/LineChart";
 import BarChart from "@/components/Charts/BarChart";
+import DoughnutChart from "@/components/Charts/DoughnutChart"
 import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
@@ -268,10 +234,71 @@ export default {
     BarChart,
     TaskList,
     UserTable,
+    DoughnutChart
   },
   data() {
     return {
-      bigLineChart: {
+      billMonth:"",
+      billAmount:"",
+      kpi1:"",
+      kpi2:"",
+      kpi3:"",
+      electricityDoughnut:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Aircon", "Fridge", "TV", "Fan & Lights", "Others"],
+          datasets: [
+            {
+              label: "Electricity",
+              data: [40, 30, 15, 10, 5],
+              backgroundColor: [
+                'rgb(191, 236, 221)',
+                'rgb(118, 232, 194)',
+                'rgb(85, 105, 98)',
+                'rgb(92, 181, 151)',
+                'rgb(36, 71, 60)'
+              ],
+              fontColor: "fff",
+            },
+          ],
+        },
+      },
+      waterDoughnut:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Common", "Master", "Washing Machine" ,"Kitchen"],
+          datasets: [
+            {
+              label: "Water",
+              data: [45, 30, 15, 10],
+              backgroundColor: [
+                'rgb(31, 43, 133)',
+                'rgb(18, 25, 79)',
+                'rgb(111, 122, 209)',
+                'rgb(81, 89, 153)'
+              ]
+            },
+          ],
+        }
+      },
+      gasDoughnut:{
+        extraOptions: chartConfigs.doughnutChartOptions,
+        chartData: {
+          labels: ["Stove 1", "Stove 2", "Stove 3"],
+          datasets: [
+            {
+              label: "Gas",
+              data: [40, 30, 30],
+              backgroundColor: [
+                'rgb(107, 32, 132)',
+                'rgb(64, 19, 79)',
+                'rgb(185, 113, 209)'
+              ]
+            },
+          ],
+        },
+      },
+      bigBarChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
           [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -295,7 +322,7 @@ export default {
             "DEC",
           ],
         },
-        extraOptions: chartConfigs.purpleChartOptions,
+        extraOptions: chartConfigs.bigBarChartOptions,
         gradientColors: config.colors.primaryGradient,
         gradientStops: [1, 0.4, 0],
         categories: [],
@@ -384,7 +411,7 @@ export default {
     isRTL() {
       return this.$rtl.isRTL;
     },
-    bigLineChartCategories() {
+    bigBarChartCategories() {
       return this.$t("dashboard.chartCategories");
     },
   },
@@ -405,7 +432,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.bigLineChart.allData[index],
+            data: this.bigBarChart.allData[index],
           },
         ],
         labels: [
@@ -424,24 +451,45 @@ export default {
         ],
       };
       this.$refs.bigChart.updateGradients(chartData);
-      this.bigLineChart.chartData = chartData;
-      this.bigLineChart.activeIndex = index;
+      this.bigBarChart.chartData = chartData;
+      this.bigBarChart.activeIndex = index;
     },
+    getBillMonth(){
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var d = new Date();
+      this.billMonth = monthNames[d.getMonth()-1] 
+    },
+    calBill(){
+      var bill_list = [120.45, 160.23, 189.21, 100.29, 219.91];
+      var random =  Math.floor(Math.random() * bill_list.length);
+      this.billAmount = "$" + bill_list[random];
+    },
+    elecKPI() {
+      var elec_list = [423, 467, 541, 392, 453];
+      var random =  Math.floor(Math.random() * elec_list.length);
+      this.kpi1 = elec_list[random] + " kWh";
+    },
+    waterKPI() {
+      var water_list = [4230, 4670, 5410, 3920, 4530];
+      var random =  Math.floor(Math.random() * water_list.length);
+      this.kpi2 = water_list[random] + " L";
+    },
+    gasKPI() {
+      var gas_list = [270123, 284032, 210203, 252123, 192830];
+      var random =  Math.floor(Math.random() * gas_list.length);
+      this.kpi3 = gas_list[random].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " BTU";
+    }
   },
   mounted() {
     this.i18n = this.$i18n;
-    if (this.enableRTL) {
-      this.i18n.locale = "ar";
-      this.$rtl.enableRTL();
-    }
+    this.i18n.locale = "en";
     this.initBigChart(0);
-  },
-  beforeDestroy() {
-    if (this.$rtl.isRTL) {
-      this.i18n.locale = "en";
-      this.$rtl.disableRTL();
-    }
-  },
+    this.getBillMonth();
+    this.calBill();
+    this.elecKPI();
+    this.waterKPI();
+    this.gasKPI();
+  }
 };
 </script>
 <style>

@@ -5,10 +5,14 @@
     "performance": "Performance",
     "simpleTable": "Simple Table",
     "totalShipments": "Total Shipments",
+    "monthlyConsumption":"Monthly Consumption ($)",
+    "electricityBreakdown" : "Electricity Breakdown",
+    "waterBreakdown" : "Water Breakdown",
+    "gasBreakdown" : "Gas Breakdown",
     "chartCategories": [
-      "Accounts",
-      "Purchases",
-      "Sessions"
+      "Electricity",
+      "Water",
+      "Gas"
     ],
     "tasks": "Tasks({count})",
     "today": "Today",
