@@ -1,406 +1,448 @@
 <template>
   <div>
-    <base-header type="gradient-gray" class="pb-6 pb-8 pt-5 pt-md-8">
-      <div class="row">
-        <div class="col-xl-3 col-lg-6">
-          <stats-card
-            title="Air conditioner"
-            type="gradient-dark"
-            sub-title="200 kwH"
-            icon="ni ni-active-40"
-            class="mb-4 mb-xl-0"
-          >
-            <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i> 3.48%
-              </span>
-              <span class="text-nowrap">Since last month</span>
-            </template>
-          </stats-card>
-        </div>
-        <div class="col-xl-3 col-lg-6 ">
-          <stats-card
-            title="Electric Kettle"
-            type="gradient-red"
-            sub-title="2,356 kwH"
-            icon="ni ni-chart-pie-35"
-            class="mb-4 mb-xl-0"
-          >
-            <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i> 12.18%
-              </span>
-              <span class="text-nowrap">Since last month</span>
-            </template>
-          </stats-card>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <stats-card
-            title="Electric Oven"
-            type="gradient-blue"
-            sub-title="924 kwH"
-            icon="ni ni-money-coins"
-            class="mb-4 mb-xl-0"
-          >
-            <template v-slot:footer>
-              <span class="text-danger mr-2">
-                <i class="fa fa-arrow-down"></i> 5.72%
-              </span>
-              <span class="text-nowrap">Since last month</span>
-            </template>
-          </stats-card>
-        </div>
-        <div class="col-xl-3 col-lg-6 ">
-          <stats-card
-            title="Water Usage"
-            type="gradient-info"
-            sub-title="5000 m3"
-            icon="ni ni-chart-bar-32"
-            class="mb-4 mb-xl-0"
-          >
-            <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i> 54.8%
-              </span>
-              <span class="text-nowrap">Since last month</span>
-            </template>
-          </stats-card>
-        </div>
-      </div>
-    </base-header>
-
-    <div class="container-fluid  my-10">
-      <!--Charts-->
-      <div class="row">
-        <div class=" my-4 col-xl-12 mb-5 mb-xl-0  ">
-          <card type="default" header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">WATER</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 0 }"
-                        @click.prevent="initBigChart(0)"
-                      >
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 1 }"
-                        @click.prevent="initBigChart(1)"
-                      >
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
+    <div class="row">
+      <div class="col-lg-3">
+        <card class="card-body">
+          <div>
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="tim-icons icon-paper text-success"></i>
                 </div>
               </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
+              <div class="col-7">
+                <div class="numbers">
+                  <p>KPI 1</p>
+                  Sub metric
+                </div>
+              </div>
             </div>
-          </card>
-        </div>
+            <div>
+              <hr />
+              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+            </div>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-3">
+        <card class="card-body">
+          <div>
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="tim-icons icon-paper text-success"></i>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="numbers">
+                  <p>KPI 2</p>
+                  Sub metric
+                </div>
+              </div>
+            </div>
+            <div>
+              <hr />
+              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+            </div>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-3">
+        <card class="card-body">
+          <div>
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="tim-icons icon-paper text-success"></i>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="numbers">
+                  <p>KPI 3</p>
+                  Sub metric
+                </div>
+              </div>
+            </div>
+            <div>
+              <hr />
+              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+            </div>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-3">
+        <card class="card-body">
+          <div>
+            <div class="row">
+              <div class="col-5">
+                <div class="icon-big text-center">
+                  <i class="tim-icons icon-paper text-success"></i>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="numbers">
+                  <p>KPI 4</p>
+                  Sub metric
+                </div>
+              </div>
+            </div>
+            <div>
+              <hr />
+              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+            </div>
+          </div>
+        </card>
       </div>
     </div>
-      <!-- End charts-->
-
-
-
-      <div class="container-fluid my-10">
-      <!--Charts-->
-      <div class="row">
-        <div class=" my-4 col-xl-12 mb-5 mb-xl-0 ">
-          <card type="default" header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">ELECTRICITY</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 0 }"
-                        @click.prevent="initBigChart(0)"
-                      >
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 1 }"
-                        @click.prevent="initBigChart(1)"
-                      >
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
+    <div class="row">
+      <div class="col-12">
+        <card type="chart">
+          <template slot="header">
+            <div class="row">
+              <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
+                <h5 class="card-category">
+                  {{ $t("dashboard.totalShipments") }}
+                </h5>
+                <h2 class="card-title">{{ $t("dashboard.performance") }}</h2>
+              </div>
+              <div class="col-sm-6">
+                <div
+                  class="btn-group btn-group-toggle"
+                  :class="isRTL ? 'float-left' : 'float-right'"
+                  data-toggle="buttons"
+                >
+                  <label
+                    v-for="(option, index) in bigLineChartCategories"
+                    :key="option"
+                    class="btn btn-sm btn-primary btn-simple"
+                    :class="{ active: bigLineChart.activeIndex === index }"
+                    :id="index"
+                  >
+                    <input
+                      type="radio"
+                      @click="initBigChart(index)"
+                      name="options"
+                      autocomplete="off"
+                      :checked="bigLineChart.activeIndex === index"
+                    />
+                    {{ option }}
+                  </label>
                 </div>
               </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
             </div>
-          </card>
-        </div>
+          </template>
+          <div class="chart-area">
+            <line-chart
+              style="height: 100%"
+              ref="bigChart"
+              chart-id="big-line-chart"
+              :chart-data="bigLineChart.chartData"
+              :gradient-colors="bigLineChart.gradientColors"
+              :gradient-stops="bigLineChart.gradientStops"
+              :extra-options="bigLineChart.extraOptions"
+            >
+            </line-chart>
+          </div>
+        </card>
       </div>
-         </div>
-
-         <div class="container-fluid my-10">
-      <!--Charts-->
-      <div class="row">
-        <div class="my-4 col-xl-12 mb-5 mb-xl-0 ">
-          <card type="default" header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">GAS</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 0 }"
-                        @click.prevent="initBigChart(0)"
-                      >
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 1 }"
-                        @click.prevent="initBigChart(1)"
-                      >
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
-            </div>
-          </card>
-        </div>
-      </div>
-         </div>
-      <!-- End charts-->
-
-      <!--Tables-->
-      <div class="row mt-5">
-        <div class="col-xl-8 mb-5 mb-xl-0">
-          <page-visits-table></page-visits-table>
-        </div>
-        <div class="col-xl-4">
-          <social-traffic-table></social-traffic-table>
-        </div>
-      </div>
-      <!--End tables-->
     </div>
-  
+    <div class="row">
+      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+        <card type="chart">
+          <template slot="header">
+            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
+            <h3 class="card-title">
+              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
+            </h3>
+          </template>
+          <div class="chart-area">
+            <line-chart
+              style="height: 100%"
+              chart-id="purple-line-chart"
+              :chart-data="purpleLineChart.chartData"
+              :gradient-colors="purpleLineChart.gradientColors"
+              :gradient-stops="purpleLineChart.gradientStops"
+              :extra-options="purpleLineChart.extraOptions"
+            >
+            </line-chart>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+        <card type="chart">
+          <template slot="header">
+            <h5 class="card-category">{{ $t("dashboard.dailySales") }}</h5>
+            <h3 class="card-title">
+              <i class="tim-icons icon-delivery-fast text-info"></i> 3,500€
+            </h3>
+          </template>
+          <div class="chart-area">
+            <bar-chart
+              style="height: 100%"
+              chart-id="blue-bar-chart"
+              :chart-data="blueBarChart.chartData"
+              :gradient-stops="blueBarChart.gradientStops"
+              :extra-options="blueBarChart.extraOptions"
+            >
+            </bar-chart>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+        <card type="chart">
+          <template slot="header">
+            <h5 class="card-category">{{ $t("dashboard.completedTasks") }}</h5>
+            <h3 class="card-title">
+              <i class="tim-icons icon-send text-success"></i> 12,100K
+            </h3>
+          </template>
+          <div class="chart-area">
+            <line-chart
+              style="height: 100%"
+              chart-id="green-line-chart"
+              :chart-data="greenLineChart.chartData"
+              :gradient-stops="greenLineChart.gradientStops"
+              :extra-options="greenLineChart.extraOptions"
+            >
+            </line-chart>
+          </div>
+        </card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <card type="tasks" :header-classes="{ 'text-right': isRTL }">
+          <template slot="header">
+            <h6 class="title d-inline">
+              {{ $t("dashboard.tasks", { count: 5 }) }}
+            </h6>
+            <p class="card-category d-inline">{{ $t("dashboard.today") }}</p>
+            <base-dropdown
+              menu-on-right=""
+              tag="div"
+              title-classes="btn btn-link btn-icon"
+              aria-label="Settings menu"
+              :class="{ 'float-left': isRTL }"
+            >
+              <i slot="title" class="tim-icons icon-settings-gear-63"></i>
+              <a class="dropdown-item" href="#pablo">{{
+                $t("dashboard.dropdown.action")
+              }}</a>
+              <a class="dropdown-item" href="#pablo">{{
+                $t("dashboard.dropdown.anotherAction")
+              }}</a>
+              <a class="dropdown-item" href="#pablo">{{
+                $t("dashboard.dropdown.somethingElse")
+              }}</a>
+            </base-dropdown>
+          </template>
+          <div class="table-full-width table-responsive">
+            <task-list></task-list>
+          </div>
+        </card>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <card class="card" :header-classes="{ 'text-right': isRTL }">
+          <h4 slot="header" class="card-title">
+            {{ $t("dashboard.simpleTable") }}
+          </h4>
+          <div class="table-responsive">
+            <user-table></user-table>
+          </div>
+        </card>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-// Charts
-import { ordersChart } from "@/components/Charts/Chart";
-import Chart from "chart.js";
-
-import PageVisitsTable from "./Dashboard/PageVisitsTable";
-import SocialTrafficTable from "./Dashboard/SocialTrafficTable";
-let chart;
+import LineChart from "@/components/Charts/LineChart";
+import BarChart from "@/components/Charts/BarChart";
+import * as chartConfigs from "@/components/Charts/config";
+import TaskList from "./Dashboard/TaskList";
+import UserTable from "./Dashboard/UserTable";
+import config from "@/config";
 
 export default {
   components: {
-    PageVisitsTable,
-    SocialTrafficTable,
+    LineChart,
+    BarChart,
+    TaskList,
+    UserTable,
   },
   data() {
     return {
-      salesChartID: "salesChart",
-      ordersChartID: "ordersChart",
       bigLineChart: {
         allData: [
-          [0, 20, 10, 30, 15, 40, 20, 60, 60],
-          [0, 20, 5, 25, 10, 30, 15, 40, 40],
+          [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
+          [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
+          [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],
         ],
         activeIndex: 0,
+        chartData: {
+          datasets: [{}],
+          labels: [
+            "JAN",
+            "FEB",
+            "MAR",
+            "APR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AUG",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DEC",
+          ],
+        },
+        extraOptions: chartConfigs.purpleChartOptions,
+        gradientColors: config.colors.primaryGradient,
+        gradientStops: [1, 0.4, 0],
+        categories: [],
+      },
+      purpleLineChart: {
+        extraOptions: chartConfigs.purpleChartOptions,
+        chartData: {
+          labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+          datasets: [
+            {
+              label: "Data",
+              fill: true,
+              borderColor: config.colors.primary,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.primary,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.primary,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [80, 100, 70, 80, 120, 80],
+            },
+          ],
+        },
+        gradientColors: config.colors.primaryGradient,
+        gradientStops: [1, 0.2, 0],
+      },
+      greenLineChart: {
+        extraOptions: chartConfigs.greenChartOptions,
+        chartData: {
+          labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [90, 27, 60, 12, 80],
+            },
+          ],
+        },
+        gradientColors: [
+          "rgba(66,134,121,0.15)",
+          "rgba(66,134,121,0.0)",
+          "rgba(66,134,121,0)",
+        ],
+        gradientStops: [1, 0.4, 0],
+      },
+      blueBarChart: {
+        extraOptions: chartConfigs.barChartOptions,
+        chartData: {
+          labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+          datasets: [
+            {
+              label: "Countries",
+              fill: true,
+              borderColor: config.colors.info,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              data: [53, 20, 10, 80, 100, 45],
+            },
+          ],
+        },
+        gradientColors: config.colors.primaryGradient,
+        gradientStops: [1, 0.4, 0],
       },
     };
   },
+  computed: {
+    enableRTL() {
+      return this.$route.query.enableRTL;
+    },
+    isRTL() {
+      return this.$rtl.isRTL;
+    },
+    bigLineChartCategories() {
+      return this.$t("dashboard.chartCategories");
+    },
+  },
   methods: {
     initBigChart(index) {
-      chart.destroy();
-      chart = new Chart(
-        document.getElementById(this.salesChartID).getContext("2d"),
-        {
-          type: "line",
-          data: {
-            labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [
-              {
-                label: "Performance",
-                tension: 0.4,
-                borderWidth: 4,
-                borderColor: "#5e72e4",
-                pointRadius: 0,
-                backgroundColor: "transparent",
-                data: this.bigLineChart.allData[index],
-              },
-            ],
+      let chartData = {
+        datasets: [
+          {
+            fill: true,
+            borderColor: config.colors.primary,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: config.colors.primary,
+            pointBorderColor: "rgba(255,255,255,0)",
+            pointHoverBackgroundColor: config.colors.primary,
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: this.bigLineChart.allData[index],
           },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false,
-            },
-            tooltips: {
-              enabled: true,
-              mode: "index",
-              intersect: false,
-            },
-            scales: {
-              yAxes: [
-                {
-                  barPercentage: 1.6,
-                  gridLines: {
-                    drawBorder: false,
-                    color: "rgba(29,140,248,0.0)",
-                    zeroLineColor: "transparent",
-                  },
-                  ticks: {
-                    padding: 0,
-                    fontColor: "#8898aa",
-                    fontSize: 13,
-                    fontFamily: "Open Sans",
-                  },
-                },
-              ],
-              xAxes: [
-                {
-                  barPercentage: 1.6,
-                  gridLines: {
-                    drawBorder: false,
-                    color: "rgba(29,140,248,0.0)",
-                    zeroLineColor: "transparent",
-                  },
-                  ticks: {
-                    padding: 10,
-                    fontColor: "#8898aa",
-                    fontSize: 13,
-                    fontFamily: "Open Sans",
-                  },
-                },
-              ],
-            },
-            layout: {
-              padding: 0,
-            },
-          },
-        }
-      );
+        ],
+        labels: [
+          "JAN",
+          "FEB",
+          "MAR",
+          "APR",
+          "MAY",
+          "JUN",
+          "JUL",
+          "AUG",
+          "SEP",
+          "OCT",
+          "NOV",
+          "DEC",
+        ],
+      };
+      this.$refs.bigChart.updateGradients(chartData);
+      this.bigLineChart.chartData = chartData;
       this.bigLineChart.activeIndex = index;
     },
   },
   mounted() {
-    chart = new Chart(
-      document.getElementById(this.salesChartID).getContext("2d"),
-      {
-        type: "line",
-        data: {
-          labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [
-            {
-              label: "Performance",
-              tension: 0.4,
-              borderWidth: 4,
-              borderColor: "#5e72e4",
-              pointRadius: 0,
-              backgroundColor: "transparent",
-              data: this.bigLineChart.allData[1],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          tooltips: {
-            enabled: true,
-            mode: "index",
-            intersect: false,
-          },
-          scales: {
-            yAxes: [
-              {
-                barPercentage: 1.6,
-                gridLines: {
-                  drawBorder: false,
-                  color: "rgba(29,140,248,0.0)",
-                  zeroLineColor: "transparent",
-                },
-                ticks: {
-                  padding: 0,
-                  fontColor: "#8898aa",
-                  fontSize: 13,
-                  fontFamily: "Open Sans",
-                },
-              },
-            ],
-            xAxes: [
-              {
-                barPercentage: 1.6,
-                gridLines: {
-                  drawBorder: false,
-                  color: "rgba(29,140,248,0.0)",
-                  zeroLineColor: "transparent",
-                },
-                ticks: {
-                  padding: 10,
-                  fontColor: "#8898aa",
-                  fontSize: 13,
-                  fontFamily: "Open Sans",
-                },
-              },
-            ],
-          },
-          layout: {
-            padding: 0,
-          },
-        },
-      }
-    );
-    ordersChart.createChart(this.ordersChartID);
+    this.i18n = this.$i18n;
+    if (this.enableRTL) {
+      this.i18n.locale = "ar";
+      this.$rtl.enableRTL();
+    }
+    this.initBigChart(0);
+  },
+  beforeDestroy() {
+    if (this.$rtl.isRTL) {
+      this.i18n.locale = "en";
+      this.$rtl.disableRTL();
+    }
   },
 };
 </script>
-<style></style>
+<style>
+</style>
