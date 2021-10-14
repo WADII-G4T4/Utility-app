@@ -21,6 +21,9 @@ const Login = () =>
 const Register = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Register.vue");
 
+  const LiveTracking = () =>
+  import(/* webpackChunkName: "dashboard" */ "@/pages/LiveTracking.vue");
+
 const routes = [
   {
     path: "/",
@@ -66,6 +69,11 @@ const routes = [
         path: "table-list",
         name: "table-list",
         component: TableList
+      },
+      {
+        path: "live-tracking",
+        name: "live-tracking",
+        component: LiveTracking
       }
     ]
   },
