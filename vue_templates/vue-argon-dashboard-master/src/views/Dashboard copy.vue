@@ -1,12 +1,12 @@
 <template>
   <div>
-    <base-header type="gradient-gray" class="pb-6 pb-8 pt-5 pt-md-8">
+    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
       <div class="row">
         <div class="col-xl-3 col-lg-6">
           <stats-card
-            title="Air conditioner"
-            type="gradient-dark"
-            sub-title="200 kwH"
+            title="Total traffic"
+            type="gradient-red"
+            sub-title="350,897"
             icon="ni ni-active-40"
             class="mb-4 mb-xl-0"
           >
@@ -18,11 +18,11 @@
             </template>
           </stats-card>
         </div>
-        <div class="col-xl-3 col-lg-6 ">
+        <div class="col-xl-3 col-lg-6">
           <stats-card
-            title="Electric Kettle"
-            type="gradient-red"
-            sub-title="2,356 kwH"
+            title="Total traffic"
+            type="gradient-orange"
+            sub-title="2,356"
             icon="ni ni-chart-pie-35"
             class="mb-4 mb-xl-0"
           >
@@ -36,9 +36,9 @@
         </div>
         <div class="col-xl-3 col-lg-6">
           <stats-card
-            title="Electric Oven"
-            type="gradient-blue"
-            sub-title="924 kwH"
+            title="Sales"
+            type="gradient-green"
+            sub-title="924"
             icon="ni ni-money-coins"
             class="mb-4 mb-xl-0"
           >
@@ -50,11 +50,11 @@
             </template>
           </stats-card>
         </div>
-        <div class="col-xl-3 col-lg-6 ">
+        <div class="col-xl-3 col-lg-6">
           <stats-card
-            title="Water Usage"
+            title="Performance"
             type="gradient-info"
-            sub-title="5000 m3"
+            sub-title="49,65%"
             icon="ni ni-chart-bar-32"
             class="mb-4 mb-xl-0"
           >
@@ -69,16 +69,16 @@
       </div>
     </base-header>
 
-    <div class="container-fluid  my-10">
+    <div class="container-fluid mt--7">
       <!--Charts-->
       <div class="row">
-        <div class=" my-4 col-xl-12 mb-5 mb-xl-0  ">
+        <div class="col-xl-8 mb-5 mb-xl-0">
           <card type="default" header-classes="bg-transparent">
             <template v-slot:header>
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">WATER</h5>
+                  <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
+                  <h5 class="h3 text-white mb-0">Sales value</h5>
                 </div>
                 <div class="col">
                   <ul class="nav nav-pills justify-content-end">
@@ -113,105 +113,25 @@
             </div>
           </card>
         </div>
-      </div>
-    </div>
-      <!-- End charts-->
 
-
-
-      <div class="container-fluid my-10">
-      <!--Charts-->
-      <div class="row">
-        <div class=" my-4 col-xl-12 mb-5 mb-xl-0 ">
-          <card type="default" header-classes="bg-transparent">
+        <div class="col-xl-4">
+          <card header-classes="bg-transparent">
             <template v-slot:header>
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">ELECTRICITY</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 0 }"
-                        @click.prevent="initBigChart(0)"
-                      >
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 1 }"
-                        @click.prevent="initBigChart(1)"
-                      >
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">
+                    Performance
+                  </h6>
+                  <h5 class="h3 mb-0">Total orders</h5>
                 </div>
               </div>
             </template>
             <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
+              <canvas :height="350" :id="ordersChartID"></canvas>
             </div>
           </card>
         </div>
       </div>
-         </div>
-
-         <div class="container-fluid my-10">
-      <!--Charts-->
-      <div class="row">
-        <div class="my-4 col-xl-12 mb-5 mb-xl-0 ">
-          <card type="default" header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">utilities Consumption over Time</h6>
-                  <h5 class="h3 text-white mb-0">GAS</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 0 }"
-                        @click.prevent="initBigChart(0)"
-                      >
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a
-                        class="nav-link py-2 px-3"
-                        href="#"
-                        :class="{ active: bigLineChart.activeIndex === 1 }"
-                        @click.prevent="initBigChart(1)"
-                      >
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
-            </div>
-          </card>
-        </div>
-      </div>
-         </div>
       <!-- End charts-->
 
       <!--Tables-->
@@ -225,7 +145,7 @@
       </div>
       <!--End tables-->
     </div>
-  
+  </div>
 </template>
 <script>
 // Charts
