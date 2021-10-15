@@ -22,14 +22,14 @@ import API from './api/API'
     async mounted() {
       this.$watch('$route', this.disableRTL, { immediate: true });
       this.$watch('$sidebar.showSidebar', this.toggleNavOpen)
-      /* try {
+      try {
         const token = window.localStorage.getItem("token");
         const res = await API.token(token);
 
       } catch(err){
         window.localStorage.clear()
         this.$router.push("/")
-      } */
+      }
     }
   };
 </script>

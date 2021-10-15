@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-lg">
-        <card class="card-body">
+        <card class="card-body kpi">
           <div>
             <div class="row">
               <div class="col-3">
@@ -29,7 +29,7 @@
         </card>
       </div>
       <div class="col-lg">
-        <card class="card-body">
+        <card class="card-body kpi">
           <div>
             <div class="row">
               <div class="col-3">
@@ -56,7 +56,7 @@
         </card>
       </div>
       <div class="col-lg">
-        <card class="card-body">
+        <card class="card-body kpi">
           <div>
             <div class="row">
               <div class="col-3">
@@ -83,7 +83,7 @@
         </card>
       </div>
       <div class="col-lg">
-        <card class="card-body">
+        <card class="card-body kpi">
           <div>
             <div class="row">
               <div class="col-3">
@@ -493,4 +493,13 @@ export default {
 };
 </script>
 <style>
+/* .kpi{
+  height: 5cm;
+}
+@media screen and (max-width: 1600px) {
+  .kpi{
+    height: 7cm;
+  }
+} */
+
 </style>

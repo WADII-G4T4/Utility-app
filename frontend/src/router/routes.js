@@ -12,17 +12,19 @@ const Notifications = () =>
 const Icons = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Icons.vue");
 
-const Typography = () =>
-  import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
+
 const TableList = () =>
   import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
 const Login = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Login.vue");
 const Register = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Register.vue");
-
-  const LiveTracking = () =>
+const LiveTracking = () =>
   import(/* webpackChunkName: "dashboard" */ "@/pages/LiveTracking.vue");
+const Community = () =>
+  import(/* webpackChunkName: "dashboard" */ "@/pages/Community.vue");
+const Bills = () =>
+  import(/* webpackChunkName: "dashboard" */ "@/pages/Bills.vue");
 
 const routes = [
   {
@@ -61,11 +63,6 @@ const routes = [
         component: Icons
       },
       {
-        path: "typography",
-        name: "typography",
-        component: Typography
-      },
-      {
         path: "table-list",
         name: "table-list",
         component: TableList
@@ -74,6 +71,16 @@ const routes = [
         path: "live-tracking",
         name: "live-tracking",
         component: LiveTracking
+      },
+      {
+        path: "community",
+        name: "community",
+        component: LiveTracking
+      },
+      {
+        path: "bills",
+        name: "bills",
+        component: Bills
       }
     ]
   },
