@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-6 col-sm-6 ">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="tim-icons tim-icons-32 icon-atom text-success"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 1</p>
-                  Sub metric
+                  <p>Television</p>
+                  80 kwH
                 </div>
               </div>
             </div>
@@ -24,19 +24,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="tim-icons tim-icons-32 icon-mobile text-success"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 2</p>
-                  Sub metric
+                  <p>Electrical Stove</p>
+                  650 kwH
                 </div>
               </div>
             </div>
@@ -47,19 +47,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
-                <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                <div class="icon-large text-center">
+                  <i class="tim-icons tim-icons-32 icon-spaceship text-success "></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 3</p>
-                  Sub metric
+                  <p>Oven</p>
+                  100 kwH
                 </div>
               </div>
             </div>
@@ -70,19 +70,19 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <card class="card-body">
           <div>
             <div class="row">
               <div class="col-5">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-paper text-success"></i>
+                  <i class="tim-icons tim-icons-32 icon-laptop text-success"></i>
                 </div>
               </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p>KPI 4</p>
-                  Sub metric
+                  <p>Air-Conditioner</p>
+                  300 kwH
                 </div>
               </div>
             </div>
@@ -209,7 +209,7 @@
         </card>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks" :header-classes="{ 'text-right': isRTL }">
           <template slot="header">
@@ -251,7 +251,7 @@
           </div>
         </card>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
