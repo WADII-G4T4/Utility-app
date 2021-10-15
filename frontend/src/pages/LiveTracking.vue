@@ -1,7 +1,9 @@
 <template>
   <div>
+      
     <div class="row">
       <div class="col-lg-3">
+          
         <card class="card-body">
           <div>
             <div class="row">
@@ -261,6 +263,7 @@ import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
 import config from "@/config";
+
 
 export default {
   components: {
