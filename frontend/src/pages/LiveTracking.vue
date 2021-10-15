@@ -1,9 +1,7 @@
 <template>
   <div>
-      
     <div class="row">
       <div class="col-lg-3">
-          
         <card class="card-body">
           <div>
             <div class="row">
@@ -256,7 +254,13 @@
     </div>
   </div>
 </template>
-
+<script>
+import LineChart from "@/components/Charts/LineChart";
+import BarChart from "@/components/Charts/BarChart";
+import * as chartConfigs from "@/components/Charts/config";
+import TaskList from "./Dashboard/TaskList";
+import UserTable from "./Dashboard/UserTable";
+import config from "@/config";
 
 export default {
   components: {
@@ -440,7 +444,5 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
+<style>
 </style>
