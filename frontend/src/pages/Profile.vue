@@ -1,15 +1,16 @@
 <template>
   <div class="row">
     <div class="col-md-8">
-      <edit-profile-form :model="model">
+      <edit-profile-form :tips="tips" :firstName="firstName" :lastName="lastName" :address="address" :zip="zip" :email="email">
       </edit-profile-form>
     </div>
     <div class="col-md-4">
-      <user-card :user="user"></user-card>
+      <user-card :name="name" :occupation="occupation" ></user-card>
     </div>
   </div>
 </template>
 <script>
+import API from '../api/API'
   import EditProfileForm from './Profile/EditProfileForm';
   import UserCard from './Profile/UserCard'
   export default {
@@ -19,7 +20,7 @@
     },
     data() {
       return {
-        model: {
+        /* model: {
           company: 'Creative Code Inc.',
           email: 'mike@email.com',
           username: 'michael23',
@@ -34,9 +35,42 @@
           fullName: 'Mike Andrew',
           title: 'Ceo/Co-Founder',
           description: `Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...`,
-        }
+        } */
+        tips: [],
+        firstName: null,
+        lastName: null,
+        address: null,
+        zip: null,
+        email: null,
+        name: null,
+        occupation: null
       }
+    },
+    async mounted(){
+    const token = window.localStorage.getItem("token");
+    try {
+      const res = await API.findTip(token)
+      this.tips = res.data[0].tips
+    } catch (error) {
+      
     }
+    try {
+      
+      const res1 = await API.findProfile(token)
+      
+      const { name, address, zip, email, occupation } = res1.data[0]
+      this.firstName = name.split(" ")[0]
+      this.lastName = name.split(" ")[1]
+      this.address = address;
+      this.zip = zip;
+      this.email = email
+      this.name = name
+      this.occupation = occupation
+    } catch (error) {
+      console.log(error)
+    }
+    
+  },
   }
 </script>
 <style>

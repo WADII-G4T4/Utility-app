@@ -31,6 +31,7 @@
         </base-input>
       </div>
     </div>
+    
     <div class="row">
       <div class="col-md-12">
         <base-input
@@ -46,13 +47,13 @@
         <base-input label="Postal Code" placeholder="ZIP Code" v-model="zip"> </base-input>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-for="(tip, index) in tips" :key="index">
       <div class="col-md-8">
         <base-input>
           <label>Tips</label>
         </base-input>
         <ul>
-          <li v-for="(tip, index) in tips" :key="index">
+          <li>
             <textarea
               rows="3"
               cols="80"
@@ -61,14 +62,19 @@
               v-model="tip.words"
             >
             </textarea>
+            
           </li>
         </ul>
 
-        <button @click="addTip" class="btn btn-black btn-sm">
-          <i class="tim-icons icon-simple-add add m-auto"></i>
-        </button>
+        
+      </div>
+      <div class="col-md-4">
+        <i class="tim-icons icon-trash-simple add m-auto" @click="remove(index)"></i>
       </div>
     </div>
+    <button @click="addTip" class="btn btn-black btn-sm">
+          <i class="tim-icons icon-simple-add add m-auto" ></i>
+    </button>
     <base-button slot="footer" type="primary" fill @click="save">Save</base-button>
   </card>
 </template>
@@ -76,41 +82,19 @@
 import API from '../../api/API'
 export default {
   props: {
-    model: {
-      type: Object,
-      default: () => {
-        return {};
-      }
-    }
+    tips: [],
+    firstName: null,
+    lastName: null,
+    address: null,
+    zip: null,
+    email: null
   },
   data() {
     return {
-      tips: [],
-      firstName: null,
-      lastName: null,
-      address: null,
-      zip: null,
-      email: null
+      
     };
   },
-  async mounted(){
-    const token = window.localStorage.getItem("token");
-    try {
-      const res = await API.findTip(token)
-      const res1 = await API.findProfile(token)
-      
-      this.tips = res.data[0].tips
-      const { name, address, zip, email } = res1.data[0]
-      this.firstName = name.split(" ")[0]
-      this.lastName = name.split(" ")[1]
-      this.address = address;
-      this.zip = zip;
-      this.email = email
-    } catch (error) {
-      console.log(error)
-    }
-    
-  },
+  
   methods: {
     addTip() {
       this.tips.push({words: ""})
@@ -126,6 +110,10 @@ export default {
       } catch(err){
         console.log(err)
       }
+    },
+    remove(val){
+      
+      this.tips.splice(val, 1)
     }
   }
 };
@@ -133,6 +121,6 @@ export default {
 <style>
 .add {
   color: white;
-  
+  cursor: pointer;
 }
 </style>

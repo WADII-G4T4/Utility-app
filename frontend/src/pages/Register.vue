@@ -9,30 +9,42 @@
               <label class="card-title label form-label">
                 First Name
               </label>
-              <input type="text" class="form-control" v-model="firstName"/>
+              <input type="text" class="form-control" v-model="firstName" required/>
             </div>
             <div class="col-lg-6 col-12">
               <label class="card-title label form-label">
                 Last Name
               </label>
-              <input type="text" class="form-control" v-model="lastName"/>
+              <input type="text" class="form-control" v-model="lastName" required/>
             </div>
           </div>
+          <label class="card-title label form-label">
+            Address
+          </label>
+          <input type="text" class="form-control" v-model="address" required/>
+          <label class="card-title label form-label">
+            Postal Code
+          </label>
+          <input type="text" class="form-control" v-model="zip" required/>
+          <label class="card-title label form-label">
+            Occupation
+          </label>
+          <input type="text" class="form-control" v-model="occupation" required/>
 
           <label class="card-title label form-label">
             Email
           </label>
-          <input type="text" class="form-control" v-model="email"/>
+          <input type="text" class="form-control" v-model="email" required/>
           <label class="card-title label form-label">
             Password
           </label>
-          <input type="password" class="form-control" v-model="password"/>
+          <input type="password" class="form-control" v-model="password" required/>
           <label class="card-title label form-label">
             Re-confirm Password
           </label>
-          <input type="password" class="form-control" v-model="re_password"/>
+          <input type="password" class="form-control" v-model="re_password" required/>
         </form>
-
+        <vue-recaptcha :sitekey="site"></vue-recaptcha>
         <a href="#" class="btn btn-primary mb-3" @click="register()">Register</a>
         <div class="card-text">
           <u><router-link to="/">Already have an account? Login here</router-link></u>
@@ -45,8 +57,10 @@
 <script>
 import Card from "../components/Cards/Card.vue";
 import API from '../api/API'
+import VueRecaptcha from 'vue-recaptcha'
 export default {
   components: {
+    VueRecaptcha,
     Card
   },
   data(){
@@ -56,6 +70,11 @@ export default {
       email: null,
       password: null,
       re_password: null,
+      address: null,
+      zip: null,
+      occupation: null,
+      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
+      secret: "6LeXbNEcAAAAAOHOleLQ4XRHUeEeSBKo1lS72tUe"
     }
   },
   methods:{
@@ -65,9 +84,12 @@ export default {
             lastName: this.lastName,
             email: this.email,
             password: this.password,
-            re_password: this.re_password
+            re_password: this.re_password,
+            address: this.address,
+            zip: this.zip,
+            occupation: this.occupation
         }
-        console.log(data)
+        
       try {
         
         const res = await API.signup(data)

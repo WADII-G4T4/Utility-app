@@ -13,7 +13,7 @@
           </label>
           <input type="password" class="form-control" v-model="password">
         </form>
-
+         <vue-recaptcha :sitekey="site"></vue-recaptcha>
         <a href="#" class="btn btn-primary mb-3" @click="login">Login</a>
         <div class="card-text">
           <p v-if="error">You have entered an incorrect email/password. Please try again.</p>
@@ -35,7 +35,8 @@ export default {
     return {
       email: null,
       password: null,
-      error: false
+      error: false,
+      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
     }
   },
   methods:{

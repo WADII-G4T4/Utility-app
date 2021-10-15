@@ -53,6 +53,7 @@ API.findTip = async (token)=>{
 }
 
 API.signin = async (data) => {
+    
     return await axios.post(`${origin}/users/signin`, data, setHeader());
 }
 
@@ -63,5 +64,11 @@ API.signup = async (data) => {
 API.token = async (token) => {
     return await axios.get(`${origin}/auth`, setHeader(token))
 }
+
+API.occupation = async (data, token) => {
+    return await axios.post(`${origin}/update/profile/occupation`, data, setHeader(token))
+}
+
+
 
 export default API;
