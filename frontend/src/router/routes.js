@@ -75,7 +75,7 @@ const routes = [
       {
         path: "community",
         name: "community",
-        component: LiveTracking
+        component: Community
       },
       {
         path: "bills",
