@@ -13,13 +13,16 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Television</p>
-                  80 kwH
+                  {{usage}} kwH
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats">
+              <a @click="getUsage">
+                <i class="tim-icons icon-refresh-02"></i> Updating Live</a></div>
+              
             </div>
           </div>
         </card>
@@ -36,13 +39,13 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Electrical Stove</p>
-                  650 kwH
+                  {{usage}} kwH
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats"><i class="tim-icons icon-refresh-02"></i> Updating Live</div>
             </div>
           </div>
         </card>
@@ -59,13 +62,13 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Oven</p>
-                  100 kwH
+                  {{usage}} kwH kwH
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats"><i class="tim-icons icon-refresh-02"></i> Updating Live</div>
             </div>
           </div>
         </card>
@@ -82,13 +85,13 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Air-Conditioner</p>
-                  300 kwH
+                  {{usage}} kwH
                 </div>
               </div>
             </div>
             <div>
               <hr />
-              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updated now</div>
+              <div class="stats"><i class="tim-icons icon-refresh-01"></i> Updating Live</div>
             </div>
           </div>
         </card>
@@ -99,6 +102,7 @@
         <card type="chart">
           <template slot="header">
             <div class="row">
+              <!-- big line graph -->
               <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
                 <h5 class="card-category">
                   {{ $t("dashboard.totalShipments") }}
@@ -147,6 +151,7 @@
       </div>
     </div>
     <div class="row">
+<!-- first mini line graph -->
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
@@ -168,26 +173,33 @@
           </div>
         </card>
       </div>
+
+    <!-- second mini line graph -->
+
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.dailySales") }}</h5>
+            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-delivery-fast text-info"></i> 3,500€
+              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
             </h3>
           </template>
           <div class="chart-area">
-            <bar-chart
+            <line-chart
               style="height: 100%"
-              chart-id="blue-bar-chart"
-              :chart-data="blueBarChart.chartData"
-              :gradient-stops="blueBarChart.gradientStops"
-              :extra-options="blueBarChart.extraOptions"
+              chart-id="purple-line-chart"
+              :chart-data="purpleLineChart.chartData"
+              :gradient-colors="purpleLineChart.gradientColors"
+              :gradient-stops="purpleLineChart.gradientStops"
+              :extra-options="purpleLineChart.extraOptions"
             >
-            </bar-chart>
+            </line-chart>
           </div>
         </card>
       </div>
+
+<!-- third mini line graph-->
+     
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
@@ -209,49 +221,7 @@
         </card>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-lg-6 col-md-12">
-        <card type="tasks" :header-classes="{ 'text-right': isRTL }">
-          <template slot="header">
-            <h6 class="title d-inline">
-              {{ $t("dashboard.tasks", { count: 5 }) }}
-            </h6>
-            <p class="card-category d-inline">{{ $t("dashboard.today") }}</p>
-            <base-dropdown
-              menu-on-right=""
-              tag="div"
-              title-classes="btn btn-link btn-icon"
-              aria-label="Settings menu"
-              :class="{ 'float-left': isRTL }"
-            >
-              <i slot="title" class="tim-icons icon-settings-gear-63"></i>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.action")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.anotherAction")
-              }}</a>
-              <a class="dropdown-item" href="#pablo">{{
-                $t("dashboard.dropdown.somethingElse")
-              }}</a>
-            </base-dropdown>
-          </template>
-          <div class="table-full-width table-responsive">
-            <task-list></task-list>
-          </div>
-        </card>
-      </div>
-      <div class="col-lg-6 col-md-12">
-        <card class="card" :header-classes="{ 'text-right': isRTL }">
-          <h4 slot="header" class="card-title">
-            {{ $t("dashboard.simpleTable") }}
-          </h4>
-          <div class="table-responsive">
-            <user-table></user-table>
-          </div>
-        </card>
-      </div>
-    </div> -->
+    
   </div>
 </template>
 <script>
@@ -271,6 +241,7 @@ export default {
   },
   data() {
     return {
+      usage:'',
       bigLineChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
@@ -368,7 +339,7 @@ export default {
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
-              data: [53, 20, 10, 80, 100, 45],
+              data: [, 20, 10, 80, 100, 45],
             },
           ],
         },
@@ -427,9 +398,17 @@ export default {
       this.bigLineChart.chartData = chartData;
       this.bigLineChart.activeIndex = index;
     },
+    getUsage(){
+      setInterval(() => {
+      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
+      var random =  Math.floor(Math.random() * usage_list.length);
+      this.usage = usage_list[random];
+       }, 2000);
+    }
   },
   mounted() {
     this.i18n = this.$i18n;
+    this.getUsage();
     if (this.enableRTL) {
       this.i18n.locale = "ar";
       this.$rtl.enableRTL();
