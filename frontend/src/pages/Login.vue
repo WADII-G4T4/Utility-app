@@ -13,10 +13,14 @@
           </label>
           <input type="password" class="form-control" v-model="password">
         </form>
-         <vue-recaptcha :sitekey="site"></vue-recaptcha>
-        <a href="#" class="btn btn-primary mb-3" @click="login">Login</a>
+         <vue-recaptcha :sitekey="site" @verify="verify"></vue-recaptcha>
+         <label class="card-title label text-danger form-label" v-if="!recaptcha">
+            Not yet verified
+          </label><br>
+        <a href="#" class="btn btn-primary mt-3" @click="login">Login</a>
+        
         <div class="card-text">
-          <p v-if="error">You have entered an incorrect email/password. Please try again.</p>
+          <p v-if="error" class="text-danger label">You have entered an incorrect email/password. Please try again.</p>
             <u><router-link to="/register">Haven't made an account? Register here</router-link></u>
         </div>
       </div>
@@ -37,6 +41,7 @@ export default {
       password: null,
       error: false,
       site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
+      recaptcha: null
     }
   },
   methods:{
@@ -45,15 +50,24 @@ export default {
             email: this.email,
             password: this.password,
         }
-      try {
-        const res = await API.signin(data)
-        const { token } = res.data;
-            
-        window.localStorage.setItem("token", token);
-        this.$router.push("/home/dashboard")
-      } catch (error) {
-        this.error = true;
+
+      if (this.email && this.password && this.recaptcha){
+        try {
+          const res = await API.signin(data)
+          const { token } = res.data;
+              
+          window.localStorage.setItem("token", token);
+          this.$router.push("/home/dashboard")
+        } catch (error) {
+          this.error = true;
+        }
+      } else {
+
       }
+      
+    },
+    verify(response){
+      this.recaptcha = response;
     }
   }  
 };
