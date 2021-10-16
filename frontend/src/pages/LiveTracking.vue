@@ -13,14 +13,14 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Television</p>
-                  {{usage}} kwH
+                  {{usage1}} kwH
                 </div>
               </div>
             </div>
             <div>
               <hr />
               <div class="stats">
-              <a @click="getUsage">
+              <!-- <a @click="getUsage"> -->
                 <i class="tim-icons icon-refresh-02"></i> Updating Live</a></div>
               
             </div>
@@ -39,7 +39,7 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Electrical Stove</p>
-                  {{usage}} kwH
+                  {{usage2}} kwH
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Oven</p>
-                  {{usage}} kwH kwH
+                  {{usage3}} kwH
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@
               <div class="col-7">
                 <div class="numbers">
                   <p>Air-Conditioner</p>
-                  {{usage}} kwH
+                  {{usage4}} kwH
                 </div>
               </div>
             </div>
@@ -241,7 +241,10 @@ export default {
   },
   data() {
     return {
-      usage:'',
+      usage1:'',
+      usage2:'',
+      usage3:'',
+      usage4:'',
       bigLineChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
@@ -398,17 +401,43 @@ export default {
       this.bigLineChart.chartData = chartData;
       this.bigLineChart.activeIndex = index;
     },
-    getUsage(){
+    getUsage1(){
       setInterval(() => {
       var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
       var random =  Math.floor(Math.random() * usage_list.length);
-      this.usage = usage_list[random];
+      this.usage1 = usage_list[random];
+       }, 2000);
+    },
+    getUsage2(){
+      setInterval(() => {
+      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
+      var random =  Math.floor(Math.random() * usage_list.length);
+      this.usage2 = usage_list[random];
+       }, 2000);
+    },
+    getUsage3(){
+      setInterval(() => {
+      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
+      var random =  Math.floor(Math.random() * usage_list.length);
+      this.usage3 = usage_list[random];
+       }, 2000);
+    },
+    getUsage4(){
+      setInterval(() => {
+      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
+      var random =  Math.floor(Math.random() * usage_list.length);
+      this.usage4 = usage_list[random];
        }, 2000);
     }
+
+
   },
   mounted() {
     this.i18n = this.$i18n;
-    this.getUsage();
+    this.getUsage1();
+    this.getUsage2();
+    this.getUsage3();
+    this.getUsage4();
     if (this.enableRTL) {
       this.i18n.locale = "ar";
       this.$rtl.enableRTL();
