@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg">
-        <card class="card-body">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-money-coins text-success" style="font-size: 40px;"></i>
+                  <i class="tim-icons icon-money-coins text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -28,13 +28,13 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="fas fa-bolt text-success" style="font-size: 40px;"></i>
+                  <i class="fas fa-bolt text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -55,13 +55,13 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="fas fa-tint text-success" style="font-size: 40px;"></i>
+                  <i class="fas fa-tint text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -82,8 +82,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
@@ -159,8 +159,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4" id="elecBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="elecBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-bolt text-success" style="font-size: 20px;"></i>
@@ -178,8 +178,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" id="waterBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="waterBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-tint text-success" style="font-size: 20px;"></i>
@@ -197,8 +197,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" id="gasBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="gasBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-burn text-success" style="font-size: 20px;"></i>
@@ -493,4 +493,26 @@ export default {
 };
 </script>
 <style>
+
+@media screen and (max-width: 1800px){
+  .kpi-card{
+    height: 15em;
+  }
+}
+@media screen and (max-width: 1250px){
+  .kpi-card{
+    height: 17em;
+  }
+}
+@media screen and (max-width: 1200px){
+  .kpi-card{
+    height: 12em;
+  }
+}
+@media screen and (max-width: 1250px){
+  .bdchart{
+    height: 25em;
+  }
+}
+
 </style>
