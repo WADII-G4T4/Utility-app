@@ -20,8 +20,8 @@
             <div>
               <hr />
               <div class="stats">
-              <!-- <a @click="getUsage"> -->
-                <i class="tim-icons icon-refresh-02"></i> Updating Live</a></div>
+            
+                <i class="tim-icons icon-refresh-02"></i> Updating Live</div>
               
             </div>
           </div>
@@ -107,7 +107,7 @@
                 <h5 class="card-category">
                   {{ $t("dashboard.totalShipments") }}
                 </h5>
-                <h2 class="card-title">{{ $t("dashboard.performance") }}</h2>
+                <h2 class="card-title">{{ $t("dashboard.monthlyUtilConsumption") }}: {{total}} </h2>
               </div>
               <div class="col-sm-6">
                 <div
@@ -115,26 +115,13 @@
                   :class="isRTL ? 'float-left' : 'float-right'"
                   data-toggle="buttons"
                 >
-                  <label
-                    v-for="(option, index) in bigLineChartCategories"
-                    :key="option"
-                    class="btn btn-sm btn-primary btn-simple"
-                    :class="{ active: bigLineChart.activeIndex === index }"
-                    :id="index"
-                  >
-                    <input
-                      type="radio"
-                      @click="initBigChart(index)"
-                      name="options"
-                      autocomplete="off"
-                      :checked="bigLineChart.activeIndex === index"
-                    />
-                    {{ option }}
-                  </label>
+                  
                 </div>
               </div>
             </div>
           </template>
+
+
           <div class="chart-area">
             <line-chart
               style="height: 100%"
@@ -155,19 +142,18 @@
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
+            <h5 class="card-category">{{ $t("dashboard.electricityBreakdown") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
+              <i class="tim-icons icon-bell-55 text-primary"></i> {{usage1}}
             </h3>
           </template>
           <div class="chart-area">
             <line-chart
               style="height: 100%"
-              chart-id="purple-line-chart"
-              :chart-data="purpleLineChart.chartData"
-              :gradient-colors="purpleLineChart.gradientColors"
-              :gradient-stops="purpleLineChart.gradientStops"
-              :extra-options="purpleLineChart.extraOptions"
+              chart-id="green-line-chart"
+              :chart-data="greenLineChart1.chartData"
+              :gradient-stops="greenLineChart1.gradientStops"
+              :extra-options="greenLineChart1.extraOptions"
             >
             </line-chart>
           </div>
@@ -179,19 +165,18 @@
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.totalShipments") }}</h5>
+            <h5 class="card-category">{{ $t("dashboard.waterBreakdown") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-bell-55 text-primary"></i> 763,215
+              <i class="tim-icons icon-video-66 text-primary"></i> {{usage2}}
             </h3>
           </template>
           <div class="chart-area">
             <line-chart
               style="height: 100%"
-              chart-id="purple-line-chart"
-              :chart-data="purpleLineChart.chartData"
-              :gradient-colors="purpleLineChart.gradientColors"
-              :gradient-stops="purpleLineChart.gradientStops"
-              :extra-options="purpleLineChart.extraOptions"
+              chart-id="green-line-chart"
+              :chart-data="greenLineChart2.chartData"
+              :gradient-stops="greenLineChart2.gradientStops"
+              :extra-options="greenLineChart2.extraOptions"
             >
             </line-chart>
           </div>
@@ -199,22 +184,23 @@
       </div>
 
 <!-- third mini line graph-->
-     
+
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
-            <h5 class="card-category">{{ $t("dashboard.completedTasks") }}</h5>
+            <h5 class="card-category">{{ $t("dashboard.gasBreakdown") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-send text-success"></i> 12,100K
+              <i class="tim-icons icon-atom text-primary"></i> {{usage3}}
             </h3>
           </template>
+
           <div class="chart-area">
             <line-chart
               style="height: 100%"
               chart-id="green-line-chart"
-              :chart-data="greenLineChart.chartData"
-              :gradient-stops="greenLineChart.gradientStops"
-              :extra-options="greenLineChart.extraOptions"
+              :chart-data="greenLineChart3.chartData"
+              :gradient-stops="greenLineChart3.gradientStops"
+              :extra-options="greenLineChart3.extraOptions"
             >
             </line-chart>
           </div>
@@ -232,6 +218,8 @@ import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
 import config from "@/config";
 
+
+
 export default {
   components: {
     LineChart,
@@ -241,17 +229,24 @@ export default {
   },
   data() {
     return {
+      randomData:[],
+      smallrandomData:[],
+      smallrandomData2:[],
+      smallrandomData3:[],
+      total:'',
       usage1:'',
       usage2:'',
       usage3:'',
       usage4:'',
+    
+      
       bigLineChart: {
         allData: [
-          [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
+          [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110],
           [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
           [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],
         ],
-        activeIndex: 0,
+        // activeIndex: 0,
         chartData: {
           datasets: [{}],
           labels: [
@@ -274,36 +269,11 @@ export default {
         gradientStops: [1, 0.4, 0],
         categories: [],
       },
-      purpleLineChart: {
-        extraOptions: chartConfigs.purpleChartOptions,
-        chartData: {
-          labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
-          datasets: [
-            {
-              label: "Data",
-              fill: true,
-              borderColor: config.colors.primary,
-              borderWidth: 2,
-              borderDash: [],
-              borderDashOffset: 0.0,
-              pointBackgroundColor: config.colors.primary,
-              pointBorderColor: "rgba(255,255,255,0)",
-              pointHoverBackgroundColor: config.colors.primary,
-              pointBorderWidth: 20,
-              pointHoverRadius: 4,
-              pointHoverBorderWidth: 15,
-              pointRadius: 4,
-              data: [80, 100, 70, 80, 120, 80],
-            },
-          ],
-        },
-        gradientColors: config.colors.primaryGradient,
-        gradientStops: [1, 0.2, 0],
-      },
-      greenLineChart: {
+      
+      greenLineChart1: {
         extraOptions: chartConfigs.greenChartOptions,
         chartData: {
-          labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+          labels: ["", "", "", "", ""],
           datasets: [
             {
               label: "My First dataset",
@@ -330,26 +300,72 @@ export default {
         ],
         gradientStops: [1, 0.4, 0],
       },
-      blueBarChart: {
-        extraOptions: chartConfigs.barChartOptions,
+      
+      greenLineChart2: {
+        extraOptions: chartConfigs.greenChartOptions,
         chartData: {
-          labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+          labels: ["", "", "", "", "git"],
           datasets: [
             {
-              label: "Countries",
+              label: "My First dataset",
               fill: true,
-              borderColor: config.colors.info,
+              borderColor: config.colors.danger,
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
-              data: [, 20, 10, 80, 100, 45],
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [90, 27, 60, 12, 80],
             },
           ],
         },
-        gradientColors: config.colors.primaryGradient,
+        gradientColors: [
+          "rgba(66,134,121,0.15)",
+          "rgba(66,134,121,0.0)",
+          "rgba(66,134,121,0)",
+        ],
         gradientStops: [1, 0.4, 0],
       },
+      
+      greenLineChart3: {
+        extraOptions: chartConfigs.greenChartOptions,
+        chartData: {
+          labels: ["", "", "", "", ""],
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [90, 27, 60, 12, 80],
+            },
+          ],
+        },
+        gradientColors: [
+          "rgba(66,134,121,0.15)",
+          "rgba(66,134,121,0.0)",
+          "rgba(66,134,121,0)",
+        ],
+        gradientStops: [1, 0.4, 0],
+      },
+      
     };
+
+    
   },
   computed: {
     enableRTL() {
@@ -364,6 +380,7 @@ export default {
   },
   methods: {
     initBigChart(index) {
+      setInterval(() => {
       let chartData = {
         datasets: [
           {
@@ -379,62 +396,233 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.bigLineChart.allData[index],
+            data:this.randomData,
           },
         ],
         labels: [
-          "JAN",
-          "FEB",
-          "MAR",
-          "APR",
-          "MAY",
-          "JUN",
-          "JUL",
-          "AUG",
-          "SEP",
-          "OCT",
-          "NOV",
-          "DEC",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
         ],
       };
-      this.$refs.bigChart.updateGradients(chartData);
+      // this.$refs.bigChart.updateGradients(chartData);
       this.bigLineChart.chartData = chartData;
-      this.bigLineChart.activeIndex = index;
+      // this.bigLineChart.activeIndex = index;
+       }, 1100);
     },
+
+
+    initGreenChart1(index) {
+      setInterval(() => {
+      let chartData = {
+        
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data:this.smallrandomData,
+            },
+          ],
+        }
+            // this.$refs.bigChart.updateGradients(chartData);
+      this.greenLineChart1.chartData = chartData;
+      // this.LineChart.activeIndex = index;
+       }, 1100);
+    },
+
+    initGreenChart2(index) {
+      setInterval(() => {
+      let chartData = {
+        
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data:this.smallrandomData2,
+            },
+          ],
+        }
+            // this.$refs.bigChart.updateGradients(chartData);
+      this.greenLineChart2.chartData = chartData;
+      // this.LineChart.activeIndex = index;
+       }, 1100);
+    },
+
+    initGreenChart3(index) {
+      setInterval(() => {
+      let chartData = {
+        
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data:this.smallrandomData,
+            },
+          ],
+        }
+            // this.$refs.bigChart.updateGradients(chartData);
+      this.greenLineChart3.chartData = chartData;
+      // this.LineChart.activeIndex = index;
+       }, 1100);
+    },
+
+
+
     getUsage1(){
       setInterval(() => {
       var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
       var random =  Math.floor(Math.random() * usage_list.length);
       this.usage1 = usage_list[random];
-       }, 2000);
+       }, 1100);
     },
     getUsage2(){
       setInterval(() => {
       var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
       var random =  Math.floor(Math.random() * usage_list.length);
       this.usage2 = usage_list[random];
-       }, 2000);
+       }, 1100);
     },
     getUsage3(){
       setInterval(() => {
-      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
+      var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233, 5000, 670, 563, 5498, 3874, 2763, 465, 579,];
       var random =  Math.floor(Math.random() * usage_list.length);
       this.usage3 = usage_list[random];
-       }, 2000);
+       }, 1100);
     },
+    
     getUsage4(){
       setInterval(() => {
       var usage_list = [100, 200, 3000, 400, 550, 300, 400, 700, 676, 765, 233];
       var random =  Math.floor(Math.random() * usage_list.length);
       this.usage4 = usage_list[random];
-       }, 2000);
+       }, 1100);
+    },
+
+    getTotal(){
+      setInterval(() => {
+      var total_list = [1075, 2043, 3423, 4411, 3423, 2324, 2427, 3424, 34242, 4322, 3434];
+     var random =  Math.floor(Math.random() * total_list.length);
+      this.total = total_list[random];
+       }, 1100);
+    },
+
+    getRandomDatapoints(){
+      setInterval(() => {
+      let i =0; 
+      this.randomData =[];
+      for(i =0 ; i<12 ; i++)
+      {
+        let randnum = Math.floor(Math.random()*10000)
+        this.randomData.push(randnum);
+      }
+  
+      // console.log((this.randomData))
+      }, 2000);
+
+      
+    },
+
+    getRandomDatapointssmall(){
+      setInterval(() => {
+      let i =0; 
+      this.smallrandomData =[];
+      for(i =0 ; i<6 ; i++)
+      {
+        let randnum = Math.floor(Math.random()*100)
+        this.smallrandomData.push(randnum);
+      }
+  
+      // console.log((this.randomData))
+      }, 2000);
+
+      
+    },
+
+    getRandomDatapointssmall2(){
+      setInterval(() => {
+      let i =0; 
+      this.smallrandomData2 =[];
+      for(i =0 ; i<6 ; i++)
+      {
+        let randnum = Math.floor(Math.random()*100)
+        this.smallrandomData2.push(randnum);
+      }
+  
+      // console.log((this.randomData))
+      }, 2000);
+
+      
+    },
+
+    getRandomDatapointssmall3(){
+      setInterval(() => {
+      let i =0; 
+      this.smallrandomData3 =[];
+      for(i =0 ; i<6 ; i++)
+      {
+        let randnum = Math.floor(Math.random()*100)
+        this.smallrandomData3.push(randnum);
+      }
+  
+      // console.log((this.randomData))
+      }, 2000);
+
+      
     }
+
 
 
   },
   mounted() {
     this.i18n = this.$i18n;
+    this.getRandomDatapoints();
+    this.getRandomDatapointssmall();
+    this.getRandomDatapointssmall2();
+    this.getRandomDatapointssmall3();
     this.getUsage1();
+    this.getTotal();
     this.getUsage2();
     this.getUsage3();
     this.getUsage4();
@@ -443,6 +631,11 @@ export default {
       this.$rtl.enableRTL();
     }
     this.initBigChart(0);
+    this.initGreenChart1(0);
+    this.initGreenChart2(0);
+    this.initGreenChart3(0);
+
+
   },
   beforeDestroy() {
     if (this.$rtl.isRTL) {
