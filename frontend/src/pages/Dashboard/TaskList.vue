@@ -19,6 +19,7 @@
     </base-table>
 </template>
 <script>
+  
   import {BaseTable} from '@/components'
   export default {
     components: {
