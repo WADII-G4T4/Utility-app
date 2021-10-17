@@ -9,15 +9,23 @@
       <div class="block block-four"></div>
       <a href="#">
         <img class="avatar" src="img/anime6.png" alt="...">
-        <h5 class="title">{{user.fullName}}</h5>
+        <h5 class="title">{{name}}</h5>
       </a>
-      <p class="description">
-        {{user.title}}
+      <p class="description" v-if="!edit">
+        {{occupation}}
+        <i class="tim-icons icon-pencil pencil " @click="edit = !edit" ></i>
       </p>
+      <base-input
+          v-model="change_occupation"
+          placeholder="Occupation"
+          v-if="edit"
+        >
+        </base-input>
+        <base-button v-if="edit" slot="footer" type="primary" fill @click="save">Save</base-button>
     </div>
     <p></p>
     <p class="card-description">
-      {{user.description}}
+     
     </p>
     <div slot="footer" class="button-container">
       <base-button icon round class="btn-facebook">
@@ -33,16 +41,36 @@
   </card>
 </template>
 <script>
+import API from '../../api/API'
   export default {
     props: {
-      user: {
-        type: Object,
-        default: () => {
-          return {};
+      name: null,
+      occupation: null
+    },
+    data(){
+      return{
+        edit: false,
+        change_occupation: null
+      }
+    },
+    methods:{
+      async save(){
+        this.edit = !this.edit;
+        const token = window.localStorage.getItem("token");
+        var occupation = this.change_occupation
+        try {
+          
+          const res = await API.occupation({occupation}, token)
+          this.occupation = occupation
+        } catch(err){
+          console.log(err)
         }
       }
     }
   }
 </script>
 <style>
+.pencil{
+  cursor: pointer;
+}
 </style>

@@ -37,6 +37,23 @@ router.post("/profile", async (req, res)=>{
     }
 })
 
+router.post("/profile/occupation", async (req, res)=>{
+    const { userId, occupation } = req.body;
+    
+    try {
+        
+        const filter = { "_id":userId };
+        const update = { occupation };
+        let result = await User.findOneAndUpdate(filter, update);
+        
+        res.status(200).json({message: "Successfully updated"})
+        
+        
+    } catch(err){
+        res.status(500).json({ message: "Something went wrong." });
+    }
+})
+
 
 
 
