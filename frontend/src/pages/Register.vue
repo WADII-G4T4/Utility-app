@@ -137,8 +137,6 @@ export default {
       address: null,
       zip: null,
       occupation: null,
-      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
-      secret: "6LeXbNEcAAAAAOHOleLQ4XRHUeEeSBKo1lS72tUe",
       recaptcha: null,
       error: null
     };

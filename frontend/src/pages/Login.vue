@@ -40,7 +40,7 @@ export default {
       email: null,
       password: null,
       error: false,
-      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
+      
       recaptcha: null
     }
   },
