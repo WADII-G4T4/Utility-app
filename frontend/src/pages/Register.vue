@@ -6,92 +6,92 @@
         <form action="">
           <div class="row justify-content-between">
             <div class="col-lg-6 col-12">
-              <label class="card-title label form-label">
-                First Name
-              </label>
-              <input
-                type="text"
-                class="form-control"
+              <base-input
+                label="First Name"
+                placeholder="First Name"
                 v-model="firstName"
-                required
-              />
-              <label class="card-title label text-danger form-label" v-if="!firstName">
+              >
+              </base-input>
+              <label
+                class="card-title label text-danger form-label"
+                v-if="!firstName"
+              >
                 Please fill in this field
               </label>
             </div>
             <div class="col-lg-6 col-12">
-              <label class="card-title label form-label">
-                Last Name
-              </label>
-              <input
-                type="text"
-                class="form-control"
+              <base-input
+                label="Last Name"
+                placeholder="Last Name"
                 v-model="lastName"
-                required
-              />
-              <label class="card-title label text-danger form-label" v-if="!lastName">
+              >
+              </base-input>
+              <label
+                class="card-title label text-danger form-label"
+                v-if="!lastName"
+              >
                 Please fill in this field
               </label>
             </div>
           </div>
-          <label class="card-title label form-label">
-            Address
-          </label>
-          <input type="text" class="form-control" v-model="address" required />
-          <label class="card-title label text-danger form-label" v-if="!address">
+          <base-input label="Address" placeholder="Address" v-model="address">
+          </base-input>
+          <label
+            class="card-title label text-danger form-label"
+            v-if="!address"
+          >
             Please fill in this field </label
           ><br />
-          <label class="card-title label form-label">
-            Postal Code
-          </label>
-          <input type="text" class="form-control" v-model="zip" required />
+          <base-input
+            label="Postal Code"
+            placeholder="Postal Code"
+            v-model="zip"
+          >
+          </base-input>
           <label class="card-title label text-danger form-label" v-if="!zip">
             Please fill in this field </label
           ><br />
-          <label class="card-title label form-label">
-            Occupation
-          </label>
-          <input
-            type="text"
-            class="form-control"
+          <base-input
+            label="Occupation"
+            placeholder="Occupation"
             v-model="occupation"
-            required
-          />
-          <label class="card-title label text-danger form-label" v-if="!occupation">
+          >
+          </base-input>
+          <label
+            class="card-title label text-danger form-label"
+            v-if="!occupation"
+          >
             Please fill in this field </label
           ><br />
-          <label class="card-title label form-label">
-            Email
-          </label>
-          <input type="text" class="form-control" v-model="email" required />
+          <base-input label="Email" placeholder="Email" v-model="email">
+          </base-input>
           <label class="card-title label text-danger form-label" v-if="!email">
             Please fill in this field </label
           ><br />
-          <label class="card-title label form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            class="form-control"
+          <base-input
+            label="Password"
+            placeholder="Password"
             v-model="password"
-            required
-          />
-          <label class="card-title label text-danger form-label" v-if="!password">
+          >
+          </base-input>
+          <label
+            class="card-title label text-danger form-label"
+            v-if="!password"
+          >
             Please fill in this field </label
           ><br />
-          <label class="card-title label form-label">
-            Re-confirm Password
-          </label>
-          <input
-            type="password"
-            class="form-control"
+          <base-input
+            label="Re-confirm Password"
+            placeholder="Re-confirm Password"
             v-model="re_password"
-            required
-          />
-          <label class="card-title label text-danger form-label" v-if="!re_password">
+          >
+          </base-input>
+          <label
+            class="card-title label text-danger form-label"
+            v-if="!re_password"
+          >
             Please fill in this field </label
           ><br />
-          
         </form>
         <vue-recaptcha :sitekey="site" @verify="verify"></vue-recaptcha>
         <label
@@ -171,7 +171,7 @@ export default {
           window.localStorage.setItem("token", token);
           this.$router.push("/home/dashboard");
         } catch (error) {
-          this.error = error.response.data.message
+          this.error = error.response.data.message;
         }
       } else {
         this.error = "You have not filled in all of the required details yet";

@@ -4,14 +4,14 @@
       <div class="card-body">
         <h2 class="card-title">Login</h2>
         <form action="">
-          <label class="card-title label form-label">
-            Email
-          </label>
-          <input type="text" class="form-control" v-model="email">
-          <label class="card-title label form-label">
-            Password
-          </label>
-          <input type="password" class="form-control" v-model="password">
+          <base-input label="Email"
+                  placeholder="Email"
+                  v-model="email">
+        </base-input>
+          <base-input label="Password"
+                  placeholder="Password"
+                  v-model="password">
+        </base-input>
         </form>
          <vue-recaptcha :sitekey="site" @verify="verify"></vue-recaptcha>
          <label class="card-title label text-danger form-label" v-if="!recaptcha">
@@ -31,6 +31,7 @@
 <script>
 import Card from "../components/Cards/Card.vue";
 import API from "../api/API"
+import BaseInput from '../components/Inputs/BaseInput.vue'
 export default {
   components: {
     Card
