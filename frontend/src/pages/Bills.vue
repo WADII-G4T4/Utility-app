@@ -10,6 +10,8 @@
           </div>
         </card>
       </div>
+
+      <button>Pay Outstanding Bills</button>
     </div>
 </template>
 
@@ -57,6 +59,9 @@ const tableData = [
         data: [...tableData]
       }
     };
+  }, 
+  mounted(){
+    this.tableData.status[0]
   }
     }; 
 
@@ -65,6 +70,12 @@ const tableData = [
 </script>
 
 <style lang="scss" scoped>
+
+button {
+  border-radius:10px;
+  text-align:center;
+  margin:auto;
+}
 
 
 </style>
