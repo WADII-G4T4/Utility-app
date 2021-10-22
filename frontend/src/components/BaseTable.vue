@@ -10,10 +10,16 @@
     <tbody :class="tbodyClasses">
     <tr v-for="(item, index) in data" :key="index">
       <slot :row="item">
-        <td v-for="(column, index) in columns"
+        <td v-for="(column, index) in item"
             :key="index"
-            v-if="hasValue(item, column)">
-          {{itemValue(item, column)}}
+            v-if="column">
+          <div v-if="index!=='paid'">
+            <span v-if="index=='link'">
+              <base-button slot="footer" type="primary" v-if="!item.paid" fill @click="goTo(item)">Pay</base-button>
+              <base-button slot="footer" type="primary" v-if="item.paid" fill disabled='true'>Paid</base-button>
+            </span>
+            <span v-else>{{column}}</span>
+          </div>
         </td>
       </slot>
     </tr>
@@ -21,6 +27,7 @@
   </table>
 </template>
 <script>
+import API from '../api/API'
   export default {
     name: 'base-table',
     props: {
@@ -61,6 +68,28 @@
       },
       itemValue(item, column) {
         return item[column.toLowerCase()];
+      },
+      async goTo(item){
+        const token =
+        window.localStorage.getItem("token")
+        item.paid = true
+        var count = 0
+        for (var arr of this.data){
+          
+          if (arr.name == item.name){
+            break
+          }
+          count += 1
+          
+        }
+        try {
+          const result = API.stripeupdate({count}, token)
+        } catch (error) {
+          console.log(error)
+        }
+        
+        window.open(item.link)
+
       }
     }
   };

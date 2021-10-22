@@ -69,6 +69,17 @@ API.occupation = async (data, token) => {
     return await axios.post(`${origin}/update/profile/occupation`, data, setHeader(token))
 }
 
+API.stripe = async (token) => {
+    return await axios.get(`${origin}/stripe`, setHeader(token))
+}
+
+API.stripeupdate = async (data, token) => {
+    return await axios.post(`${origin}/stripe/update`, data, setHeader(token))
+}
+
+API.stripeadd = async (data, token) => {
+    return await axios.post(`${origin}/stripe/add`, data, setHeader(token))
+}
 
 
 export default API;

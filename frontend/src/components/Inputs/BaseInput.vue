@@ -22,7 +22,9 @@
         v-bind="$attrs"
         v-on="listeners"
         class="form-control"
-        aria-describedby="addon-right addon-left">
+        aria-describedby="addon-right addon-left"
+        :type="type">
+        
     </slot>
     <slot name="addonRight">
       <span v-if="addonRightIcon" class="input-group-append">
@@ -55,6 +57,7 @@
         type: String,
         description: "Input icon on the left"
       },
+      type: null
     },
     model: {
       prop: 'value',

@@ -138,7 +138,8 @@ export default {
       zip: null,
       occupation: null,
       recaptcha: null,
-      error: null
+      error: null,
+      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7"
     };
   },
   methods: {
@@ -165,7 +166,7 @@ export default {
       ) {
         try {
           const res = await API.signup(data);
-          console.log(res.data);
+          
           const { token } = res.data;
 
           window.localStorage.setItem("token", token);

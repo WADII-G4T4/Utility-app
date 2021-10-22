@@ -2,7 +2,7 @@
   <component
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
-    :disabled="disabled || loading"
+    :disabled="disabled=='true' || loading"
     @click="handleClick"
     class="btn"
     :class="[
@@ -34,7 +34,7 @@ export default {
     icon: Boolean,
     block: Boolean,
     loading: Boolean,
-    disabled: Boolean,
+    disabled: String,
     type: {
       type: String,
       default: "default",
