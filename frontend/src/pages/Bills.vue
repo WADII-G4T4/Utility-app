@@ -1,18 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="row">
-    <div class="col-12">
-      <card :title="table1.title">
-        <div class="table">
-          <base-table
-            :data="table1.data"
-            :columns="table1.columns"
-            thead-classes="text-primary"
-          >
-          </base-table>
-        </div>
-      </card>
-=======
     <div class="row">
       <div class="col-12">
         <card :title="table1.title">
@@ -25,11 +11,10 @@
         </card>
       </div>
 
-      <button>Pay Outstanding Bills</button>
->>>>>>> 56d48e88a82bc7fbd9b97a7d5a03378b316784c9
+      
     </div>
     <!-- <button class="btn btn-primary" @click="stripe">TEST</button> -->
-  </div>
+  
 </template>
 
 <script>
@@ -50,7 +35,6 @@ export default {
         data: []
       }
     };
-<<<<<<< HEAD
   },
   methods: {
     async stripe() {
@@ -232,14 +216,6 @@ export default {
         priceId,
         priceLink
       };
-=======
-  }, 
-  mounted(){
-    this.tableData.status[0]
-  }
-    }; 
-
->>>>>>> 56d48e88a82bc7fbd9b97a7d5a03378b316784c9
 
       
       var nums = [];
@@ -279,9 +255,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
-<style lang="scss" scoped></style>
-=======
 <style lang="scss" scoped>
 
 button {
@@ -292,4 +265,3 @@ button {
 
 
 </style>
->>>>>>> 56d48e88a82bc7fbd9b97a7d5a03378b316784c9
