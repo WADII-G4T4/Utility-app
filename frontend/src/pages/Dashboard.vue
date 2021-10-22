@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg">
-        <card class="card-body kpi">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="tim-icons icon-money-coins text-success" style="font-size: 40px;"></i>
+                  <i class="tim-icons icon-money-coins text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -28,13 +28,13 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body kpi">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="fas fa-bolt text-success" style="font-size: 40px;"></i>
+                  <i class="fas fa-bolt text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -55,13 +55,13 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body kpi">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
                 <div class="icon-big text-center">
-                  <i class="fas fa-tint text-success" style="font-size: 40px;"></i>
+                  <i class="fas fa-tint text-success" style="font-size: 35px;"></i>
                 </div>
               </div>
               <div class="col-9">
@@ -82,8 +82,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg">
-        <card class="card-body kpi">
+      <div class="col-xl-3">
+        <card class="card-body kpi-card">
           <div>
             <div class="row">
               <div class="col-3">
@@ -123,8 +123,7 @@
                   class="btn-group btn-group-toggle float-right"
                   data-toggle="buttons"
                 >
-                  <label
-                    v-for="(option, index) in bigBarChartCategories"
+                  <label v-for="(option, index) in bigBarChartCategories"
                     :key="option"
                     class="btn btn-sm btn-primary btn-simple"
                     :class="{ active: bigBarChart.activeIndex === index }"
@@ -159,8 +158,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4" id="elecBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="elecBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-bolt text-success" style="font-size: 20px;"></i>
@@ -178,8 +177,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" id="waterBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="waterBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-tint text-success" style="font-size: 20px;"></i>
@@ -197,8 +196,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" id="gasBreak">
-        <card type="chart">
+      <div class="col-xl-4" id="gasBreak">
+        <card type="chart" class="bdchart">
           <template slot="header">
             <h3 class="card-title">
               <i class="fas fa-burn text-success" style="font-size: 20px;"></i>
@@ -222,28 +221,27 @@
 <script>
 import LineChart from "@/components/Charts/LineChart";
 import BarChart from "@/components/Charts/BarChart";
-import DoughnutChart from "@/components/Charts/DoughnutChart"
+import DoughnutChart from "@/components/Charts/DoughnutChart";
 import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
 import config from "@/config";
-
 export default {
   components: {
     LineChart,
     BarChart,
     TaskList,
     UserTable,
-    DoughnutChart
+    DoughnutChart,
   },
   data() {
     return {
-      billMonth:"",
-      billAmount:"",
-      kpi1:"",
-      kpi2:"",
-      kpi3:"",
-      electricityDoughnut:{
+      billMonth: "",
+      billAmount: "",
+      kpi1: "",
+      kpi2: "",
+      kpi3: "",
+      electricityDoughnut: {
         extraOptions: chartConfigs.doughnutChartOptions,
         chartData: {
           labels: ["Aircon", "Fridge", "TV", "Fan & Lights", "Others"],
@@ -252,36 +250,36 @@ export default {
               label: "Electricity",
               data: [40, 30, 15, 10, 5],
               backgroundColor: [
-                'rgb(191, 236, 221)',
-                'rgb(118, 232, 194)',
-                'rgb(85, 105, 98)',
-                'rgb(92, 181, 151)',
-                'rgb(36, 71, 60)'
+                "rgb(191, 236, 221)",
+                "rgb(118, 232, 194)",
+                "rgb(85, 105, 98)",
+                "rgb(92, 181, 151)",
+                "rgb(36, 71, 60)",
               ],
               fontColor: "fff",
             },
           ],
         },
       },
-      waterDoughnut:{
+      waterDoughnut: {
         extraOptions: chartConfigs.doughnutChartOptions,
         chartData: {
-          labels: ["Common", "Master", "Washing Machine" ,"Kitchen"],
+          labels: ["Common", "Master", "Washing Machine", "Kitchen"],
           datasets: [
             {
               label: "Water",
               data: [45, 30, 15, 10],
               backgroundColor: [
-                'rgb(31, 43, 133)',
-                'rgb(18, 25, 79)',
-                'rgb(111, 122, 209)',
-                'rgb(81, 89, 153)'
-              ]
+                "rgb(31, 43, 133)",
+                "rgb(18, 25, 79)",
+                "rgb(111, 122, 209)",
+                "rgb(81, 89, 153)",
+              ],
             },
           ],
-        }
+        },
       },
-      gasDoughnut:{
+      gasDoughnut: {
         extraOptions: chartConfigs.doughnutChartOptions,
         chartData: {
           labels: ["Stove 1", "Stove 2", "Stove 3"],
@@ -290,10 +288,10 @@ export default {
               label: "Gas",
               data: [40, 30, 30],
               backgroundColor: [
-                'rgb(107, 32, 132)',
-                'rgb(64, 19, 79)',
-                'rgb(185, 113, 209)'
-              ]
+                "rgb(107, 32, 132)",
+                "rgb(64, 19, 79)",
+                "rgb(185, 113, 209)",
+              ],
             },
           ],
         },
@@ -454,31 +452,46 @@ export default {
       this.bigBarChart.chartData = chartData;
       this.bigBarChart.activeIndex = index;
     },
-    getBillMonth(){
-      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    getBillMonth() {
+      var monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
       var d = new Date();
-      this.billMonth = monthNames[d.getMonth()-1] 
+      this.billMonth = monthNames[d.getMonth() - 1];
     },
-    calBill(){
+    calBill() {
       var bill_list = [120.45, 160.23, 189.21, 100.29, 219.91];
-      var random =  Math.floor(Math.random() * bill_list.length);
+      var random = Math.floor(Math.random() * bill_list.length);
       this.billAmount = "$" + bill_list[random];
     },
     elecKPI() {
       var elec_list = [423, 467, 541, 392, 453];
-      var random =  Math.floor(Math.random() * elec_list.length);
+      var random = Math.floor(Math.random() * elec_list.length);
       this.kpi1 = elec_list[random] + " kWh";
     },
     waterKPI() {
       var water_list = [4230, 4670, 5410, 3920, 4530];
-      var random =  Math.floor(Math.random() * water_list.length);
+      var random = Math.floor(Math.random() * water_list.length);
       this.kpi2 = water_list[random] + " L";
     },
     gasKPI() {
       var gas_list = [270123, 284032, 210203, 252123, 192830];
-      var random =  Math.floor(Math.random() * gas_list.length);
-      this.kpi3 = gas_list[random].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " BTU";
-    }
+      var random = Math.floor(Math.random() * gas_list.length);
+      this.kpi3 =
+        gas_list[random].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+        " BTU";
+    },
   },
   mounted() {
     this.i18n = this.$i18n;
@@ -489,17 +502,28 @@ export default {
     this.elecKPI();
     this.waterKPI();
     this.gasKPI();
-  }
+  },
 };
 </script>
 <style>
-/* .kpi{
-  height: 5cm;
-}
-@media screen and (max-width: 1600px) {
-  .kpi{
-    height: 7cm;
+@media screen and (max-width: 1800px) {
+  .kpi-card {
+    height: 15em;
   }
-} */
-
+}
+@media screen and (max-width: 1250px) {
+  .kpi-card {
+    height: 17em;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .kpi-card {
+    height: 12em;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .bdchart {
+    height: 25em;
+  }
+}
 </style>
