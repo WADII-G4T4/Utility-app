@@ -226,30 +226,25 @@ export default {
       
       var price_link_id = [];
       for (i in priceId) {
-        var num = nums[i]
-        var price = priceId[i][num]
-        var link = priceLink[i][num]
-        price_link_id.push({price, link, paid: false})
+        var num = nums[i];
+        var price = priceId[i][num];
+        var link = priceLink[i][num];
+        price_link_id.push({price, link, paid: false});
       }
       try {
-        
         const res1 = await API.stripeadd({prices: price_link_id}, token);
-        
       } catch (err) {
         console.log(err);
       }
-      
     }
   },
   async mounted(){
     const token = window.localStorage.getItem("token")
     try {
       const result = await API.stripe(token)
-      
       this.table1.data = result.data.extracted
-      
     } catch (error) {
-      
+      console.log(error);
     }
   }
 };
