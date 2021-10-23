@@ -22,7 +22,9 @@ import router from "./router/index";
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
 import './registerServiceWorker'
+import Spinner from 'vue-simple-spinner'
 Vue.component( 'vue-recaptcha', VueRecaptcha)
+Vue.component('vue-simple-spinner', Spinner)
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
@@ -37,5 +39,6 @@ Vue.use(VueRecaptcha, {
 new Vue({
   router,
   i18n,
+  
   render: h => h(App)
 }).$mount("#app");

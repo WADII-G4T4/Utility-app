@@ -22,9 +22,9 @@ router.get("/", async (req, res) => {
         ); */
     var extracted = []
     const results = await Stripes.find({userId})
-    console.log(results)
+    
     for (var i = 0; i < 12; i++){
-        console.log(results[0].prices[i])
+        
         const price = await stripe.prices.retrieve(
             results[0].prices[i].price
         );
