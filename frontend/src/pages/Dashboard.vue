@@ -20,8 +20,8 @@
             <div>
               <hr />
               <div class="stats">
-                <a @click="calBill">
-                  <i class="tim-icons icon-refresh-01"></i> Updated now
+                <a>
+                  Updated as of {{currTime}}
                 </a>
               </div>
             </div>
@@ -226,6 +226,8 @@ import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
 import config from "@/config";
+import API from "../api/API";
+
 export default {
   components: {
     LineChart,
@@ -236,6 +238,9 @@ export default {
   },
   data() {
     return {
+      currTime: "",
+      bills: "",
+      prevMonthNum: "",
       billMonth: "",
       billAmount: "",
       kpi1: "",
@@ -297,28 +302,11 @@ export default {
         },
       },
       bigBarChart: {
-        allData: [
-          [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
-          [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
-          [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],
-        ],
+        allData: [],
         activeIndex: 0,
         chartData: {
           datasets: [{}],
-          labels: [
-            "JAN",
-            "FEB",
-            "MAR",
-            "APR",
-            "MAY",
-            "JUN",
-            "JUL",
-            "AUG",
-            "SEP",
-            "OCT",
-            "NOV",
-            "DEC",
-          ],
+          labels: []
         },
         extraOptions: chartConfigs.bigBarChartOptions,
         gradientColors: config.colors.primaryGradient,
@@ -412,9 +400,54 @@ export default {
     bigBarChartCategories() {
       return this.$t("dashboard.chartCategories");
     },
+    async stripe() {
+      const token = window.localStorage.getItem("token")
+      console.log(token)
+      try {
+        const res1 = await API.stripe(token);
+        console.log(res1);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   methods: {
+    setBigChartData(bills){
+      var numData = [[],[],[]];
+      for (var i=0;i<(this.prevMonthNum+1);i++){
+        var amount = parseInt(String(bills[i].price).slice(0,-2));
+        for (var j=0;j<numData.length;j++){
+          if (j==numData.length-1){
+            numData[j].push(amount);
+          }
+          else{
+            var temp = parseFloat((Math.floor(Math.random() * (amount/100*70))).toFixed(2));
+            numData[j].push(temp)
+            amount = amount - temp 
+          }
+        };
+      };
+      this.bigBarChart.allData = numData;
+    },
     initBigChart(index) {
+      var monthsData = [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC",
+      ];
+      var monthLabels = [];
+      for (var i=0;i<(this.prevMonthNum+1);i++){
+        monthLabels.push(monthsData[i]);
+      };
       let chartData = {
         datasets: [
           {
@@ -433,20 +466,7 @@ export default {
             data: this.bigBarChart.allData[index],
           },
         ],
-        labels: [
-          "JAN",
-          "FEB",
-          "MAR",
-          "APR",
-          "MAY",
-          "JUN",
-          "JUL",
-          "AUG",
-          "SEP",
-          "OCT",
-          "NOV",
-          "DEC",
-        ],
+        labels: monthLabels,
       };
       this.$refs.bigChart.updateGradients(chartData);
       this.bigBarChart.chartData = chartData;
@@ -468,12 +488,18 @@ export default {
         "December",
       ];
       var d = new Date();
+      this.prevMonthNum = parseInt(d.getMonth() - 1);
       this.billMonth = monthNames[d.getMonth() - 1];
+      this.currTime = String(d).slice(0,String(d).indexOf("GMT"));
     },
-    calBill() {
-      var bill_list = [120.45, 160.23, 189.21, 100.29, 219.91];
-      var random = Math.floor(Math.random() * bill_list.length);
-      this.billAmount = "$" + bill_list[random];
+    calBill(bills) {
+      if (bills[this.prevMonthNum].paid == false) {
+        this.billAmount = "$" + String(bills[this.prevMonthNum].price).slice(0,-2) + "." + String(bills[this.prevMonthNum].price).slice(-2);
+      }
+      else {
+        this.billAmount = "$" + 0;
+        this.billMonth = "()";
+      }
     },
     elecKPI() {
       var elec_list = [423, 467, 541, 392, 453];
@@ -493,12 +519,21 @@ export default {
         " BTU";
     },
   },
-  mounted() {
+  async mounted() {
+    this.getBillMonth();
+    const token = window.localStorage.getItem("token")
+    try {
+      const result = await API.stripe(token);
+      this.calBill(result.data.extracted);      
+      this.setBigChartData(result.data.extracted);
+      this.initBigChart(0)
+    } catch (error) {
+      console.log(error);
+    }
     this.i18n = this.$i18n;
     this.i18n.locale = "en";
-    this.initBigChart(0);
-    this.getBillMonth();
-    this.calBill();
+    //this.initBigChart(0);
+    //this.calBill();
     this.elecKPI();
     this.waterKPI();
     this.gasKPI();
