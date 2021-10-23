@@ -537,11 +537,7 @@ export default {
       this.calBill(result.data.extracted);      
       this.setBigChartData(result.data.extracted);
       this.initBigChart(0)
-<<<<<<< HEAD
       this.isLoading = false;
-=======
-      this.isLoading = true;
->>>>>>> 7b2a2e21d6688ae008d91d90ad2d50e0e6167b84
     } catch (error) {
       console.log(error);
     }
