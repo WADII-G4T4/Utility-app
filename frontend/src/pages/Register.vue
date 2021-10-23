@@ -72,6 +72,7 @@
             label="Password"
             placeholder="Password"
             v-model="password"
+            type="password"
           >
           </base-input>
           <label
@@ -84,6 +85,7 @@
             label="Re-confirm Password"
             placeholder="Re-confirm Password"
             v-model="re_password"
+            type="password"
           >
           </base-input>
           <label
@@ -100,9 +102,15 @@
         >
           Not yet verified </label
         ><br />
-        <a href="#" class="btn btn-primary mb-3" @click="register()"
-          >Register</a
+        <div @click="register">
+        <vue-loading-button
+          :loading="isLoading"
+          
+          class="btn btn-primary "
+          
+          >Register</vue-loading-button
         >
+        </div>
         <div class="card-text">
           <p v-if="error" class="text-danger label">
             {{ error }}
@@ -129,6 +137,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       firstName: null,
       lastName: null,
       email: null,
@@ -144,6 +153,7 @@ export default {
   },
   methods: {
     async register() {
+      this.isLoading = true;
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,

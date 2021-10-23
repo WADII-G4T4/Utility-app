@@ -50,8 +50,23 @@ export default {
       const result = await API.stripe(token);
       this.isLoading = true;
 
-      this.table1.data = result.data.extracted;
-    } catch (error) {}
+      
+      var date = new Date()
+      var month = date.getMonth()
+      for (var index in result.data.extracted){
+        if (index >= month){
+          break
+        } else {
+          var price = String(result.data.extracted[index].price);
+          price = "$" + price.substring(0,price.length-2) + "." + price.substr(price.length-2, 2)
+          result.data.extracted[index].price = price
+          this.table1.data.push(result.data.extracted[index])
+        }
+      }
+      this.table1.data = this.table1.data.reverse()
+    } catch (error) {
+      console.log(error)
+    }
   }
 };
 </script>

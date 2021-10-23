@@ -114,7 +114,10 @@
       <div class="col-12">
         <card type="chart">
           <template slot="header">
-            <div class="row">
+            <div class="row chart">
+              <div v-if="isLoading" class="loader">
+                <vue-simple-spinner message="Please wait while we retrieve your information"></vue-simple-spinner>
+              </div>
               <div class="col-sm-6 text-left">
                 <h2 class="card-title">{{ $t("dashboard.monthlyConsumption") }}</h2>
               </div>
@@ -238,6 +241,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       currTime: "",
       bills: "",
       prevMonthNum: "",
@@ -520,13 +524,16 @@ export default {
     },
   },
   async mounted() {
+    
     this.getBillMonth();
     const token = window.localStorage.getItem("token")
     try {
+      this.isLoading = true;
       const result = await API.stripe(token);
       this.calBill(result.data.extracted);      
       this.setBigChartData(result.data.extracted);
       this.initBigChart(0)
+      this.isLoading = false;
     } catch (error) {
       console.log(error);
     }
@@ -541,6 +548,14 @@ export default {
 };
 </script>
 <style>
+.chart{
+  position: relative;
+}
+.loader{
+  position: absolute;
+  top: 170%;
+  left: 37%;
+}
 @media screen and (max-width: 1800px) {
   .kpi-card {
     height: 15em;

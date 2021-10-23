@@ -23,8 +23,10 @@ import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
 import './registerServiceWorker'
 import Spinner from 'vue-simple-spinner'
+import VueLoadingButton from 'vue-loading-button'
 Vue.component( 'vue-recaptcha', VueRecaptcha)
 Vue.component('vue-simple-spinner', Spinner)
+Vue.component('vue-loading-button', VueLoadingButton)
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
