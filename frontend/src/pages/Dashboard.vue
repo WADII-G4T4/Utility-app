@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div v-if="!isLoading" class="loader">
+      <vue-simple-spinner message="Please wait while we retrieve your data"></vue-simple-spinner>
+      <br>
+    </div>
     <div class="row">
       <div class="col-xl-3">
         <card class="card-body kpi-card">
@@ -533,14 +537,16 @@ export default {
       this.calBill(result.data.extracted);      
       this.setBigChartData(result.data.extracted);
       this.initBigChart(0)
+<<<<<<< HEAD
       this.isLoading = false;
+=======
+      this.isLoading = true;
+>>>>>>> 7b2a2e21d6688ae008d91d90ad2d50e0e6167b84
     } catch (error) {
       console.log(error);
     }
     this.i18n = this.$i18n;
     this.i18n.locale = "en";
-    //this.initBigChart(0);
-    //this.calBill();
     this.elecKPI();
     this.waterKPI();
     this.gasKPI();
