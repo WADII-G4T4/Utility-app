@@ -115,7 +115,8 @@ export default {
       
       this.tips.splice(val, 1)
     }
-  }
+  },
+  
 };
 </script>
 <style>

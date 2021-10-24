@@ -202,4 +202,7 @@ export default {
 .label {
   font-size: 15px;
 }
+.rc-anchor-normal{
+  width: 100%;
+}
 </style>

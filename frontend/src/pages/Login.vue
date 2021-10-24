@@ -1,6 +1,6 @@
 <template>
   <div class="container ">
-    <card style="width: 50%;" class="mx-auto login">
+    <card style="width: 70%;" class="mx-auto login">
       <div class="card-body">
         <h2 class="card-title">Login</h2>
         <form action="">
@@ -99,5 +99,8 @@ export default {
 }
 .label {
   font-size: 15px;
+}
+#rc-anchor-container{
+  width: 500px !important;
 }
 </style>
