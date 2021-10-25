@@ -77,7 +77,8 @@
                            menu-classes="dropdown-navbar">
               <a slot="title" href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true">
                 <div class="photo">
-                  <img src="img/anime3.png">
+                  <img v-if="gender == 'M'" src="img/anime3.png">
+                  <img v-else src="img/anime6.png">
                 </div>
                 <b class="caret d-none d-lg-block d-xl-block"></b>
                 <p class="d-lg-none">
@@ -106,6 +107,9 @@
     components: {
       CollapseTransition,
       Modal
+    },
+    props:{
+      gender: null
     },
     computed: {
       routeName() {

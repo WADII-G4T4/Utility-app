@@ -16,7 +16,7 @@
       </template>
     </side-bar>
     <div class="main-panel">
-      <top-navbar></top-navbar>
+      <top-navbar :gender="gender"></top-navbar>
 
       <dashboard-content @click.native="toggleSidebar">
 
@@ -33,6 +33,7 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "./MobileMenu";
+import API from '../../api/API'
 export default {
   components: {
     TopNavbar,
@@ -40,12 +41,32 @@ export default {
     DashboardContent,
     MobileMenu
   },
+  data(){
+    return {
+      gender: null
+    }
+  },
   methods: {
     toggleSidebar() {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
       }
     }
-  }
+  },
+  async mounted(){
+    const token = window.localStorage.getItem("token");
+    try {
+      
+      const res1 = await API.findProfile(token)
+      
+      const { gender } = res1.data[0]
+      
+      this.gender = gender
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  },
 };
 </script>

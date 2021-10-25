@@ -30,7 +30,7 @@ user.signin = async (req, res) => {
 }
 
 user.signup = async (req, res) => {
-    const { firstName, lastName, email, password, re_password, address, zip, occupation } = req.body;
+    const { firstName, lastName, email, password, re_password, address, zip, occupation, gender } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -43,7 +43,7 @@ user.signup = async (req, res) => {
         }
         
         const hashedPassword = await bcrypt.hash(password, 12);
-        const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}`, address, zip, occupation });
+        const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}`, address, zip, occupation, gender });
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
         const data = await Prices.find()
         var prices = []

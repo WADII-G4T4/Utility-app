@@ -41,7 +41,7 @@
             v-if="!address"
           >
             Please fill in this field </label
-          ><br />
+          >
           <base-input
             label="Postal Code"
             placeholder="Postal Code"
@@ -50,7 +50,7 @@
           </base-input>
           <label class="card-title label text-danger form-label" v-if="!zip">
             Please fill in this field </label
-          ><br />
+          >
           <base-input
             label="Occupation"
             placeholder="Occupation"
@@ -62,12 +62,25 @@
             v-if="!occupation"
           >
             Please fill in this field </label
-          ><br />
+          ><br>
+          <label class="control-label">
+            Gender
+          </label>
+          <select class="form-select w-100 mb-3 select" v-model="gender">
+            <option value="M" selected>Male</option>
+            <option value="F">Female</option>
+          </select>
+          <label
+            class="card-title label text-danger form-label"
+            v-if="!gender"
+          >
+            Please fill in this field </label
+          >
           <base-input label="Email" placeholder="Email" v-model="email">
           </base-input>
           <label class="card-title label text-danger form-label" v-if="!email">
             Please fill in this field </label
-          ><br />
+          >
           <base-input
             label="Password"
             placeholder="Password"
@@ -80,7 +93,7 @@
             v-if="!password"
           >
             Please fill in this field </label
-          ><br />
+          >
           <base-input
             label="Re-confirm Password"
             placeholder="Re-confirm Password"
@@ -93,7 +106,7 @@
             v-if="!re_password"
           >
             Please fill in this field </label
-          ><br />
+          >
         </form>
         <vue-recaptcha :sitekey="site" @verify="verify"></vue-recaptcha>
         <label
@@ -101,12 +114,12 @@
           v-if="!recaptcha"
         >
           Not yet verified </label
-        ><br />
+        >
         <div @click="register">
         <vue-loading-button
           :loading="isLoading"
           
-          class="btn btn-primary "
+          class="btn btn-primary mt-2"
           
           >Register</vue-loading-button
         >
@@ -148,7 +161,8 @@ export default {
       occupation: null,
       recaptcha: null,
       error: null,
-      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7"
+      site: "6LeXbNEcAAAAADXZ4hJWouw34d7_KNQHrFddaGE7",
+      gender: null
     };
   },
   methods: {
@@ -162,7 +176,8 @@ export default {
         re_password: this.re_password,
         address: this.address,
         zip: this.zip,
-        occupation: this.occupation
+        occupation: this.occupation,
+        gender: this.gender
       };
       if (
         this.firstName &&
@@ -172,7 +187,8 @@ export default {
         this.re_password &&
         this.address &&
         this.occupation &&
-        this.recaptcha
+        this.recaptcha && 
+        this.gender
       ) {
         try {
           const res = await API.signup(data);
@@ -204,5 +220,14 @@ export default {
 }
 .rc-anchor-normal{
   width: 100%;
+}
+.select{
+  background-color: rgb(39,41,59);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  border-color: #2b3553;
+  height: 39px;
+  padding-left: 13px;
+  font-size: 0.75rem;
 }
 </style>

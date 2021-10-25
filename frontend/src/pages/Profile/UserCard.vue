@@ -8,7 +8,8 @@
       <div class="block block-three"></div>
       <div class="block block-four"></div>
       <a href="#">
-        <img class="avatar" src="img/anime6.png" alt="...">
+        <img class="avatar" v-if="gender == 'M'" src="img/anime3.png" alt="...">
+        <img class="avatar" v-else src="img/anime6.png" alt="...">
         <h5 class="title">{{name}}</h5>
       </a>
       <p class="description" v-if="!edit">
@@ -45,7 +46,8 @@ import API from '../../api/API'
   export default {
     props: {
       name: null,
-      occupation: null
+      occupation: null,
+      gender: null
     },
     data(){
       return{

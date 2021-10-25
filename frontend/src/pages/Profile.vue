@@ -5,7 +5,7 @@
       </edit-profile-form>
     </div>
     <div class="col-md-4">
-      <user-card :name="name" :occupation="occupation" ></user-card>
+      <user-card :name="name" :occupation="occupation" :gender="gender" ></user-card>
     </div>
   </div>
 </template>
@@ -43,7 +43,8 @@ import API from '../api/API'
         zip: null,
         email: null,
         name: null,
-        occupation: null
+        occupation: null,
+        gender: null
       }
     },
     async mounted(){
@@ -58,7 +59,7 @@ import API from '../api/API'
       
       const res1 = await API.findProfile(token)
       
-      const { name, address, zip, email, occupation } = res1.data[0]
+      const { name, address, zip, email, occupation, gender } = res1.data[0]
       this.firstName = name.split(" ")[0]
       this.lastName = name.split(" ")[1]
       this.address = address;
@@ -66,6 +67,8 @@ import API from '../api/API'
       this.email = email
       this.name = name
       this.occupation = occupation
+      this.gender = gender
+      console.log(this.gender)
     } catch (error) {
       console.log(error)
     }

@@ -478,7 +478,7 @@ export default {
 }
 .loader{
   position: absolute;
-  top: 170%;
+  top: 250%;
   left: 37%;
 }
 @media screen and (max-width: 1800px) {
