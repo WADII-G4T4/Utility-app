@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 ">
-        <card class="card-body">
+      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+        <card class="card-body flex-fill">
           <div>
             <div class="row">
               <div class="col-5">
@@ -27,8 +27,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <card class="card-body">
+      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+        <card class="card-body flex-fill">
           <div>
             <div class="row">
               <div class="col-5">
@@ -50,8 +50,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <card class="card-body">
+      <div class="col-lg-3 col-md-6 col-sm-12 d-flex" >
+        <card class="card-body flex-fill" >
           <div>
             <div class="row">
               <div class="col-5">
@@ -59,8 +59,8 @@
                   <i class="tim-icons tim-icons-32 icon-spaceship text-success "></i>
                 </div>
               </div>
-              <div class="col-7">
-                <div class="numbers">
+              <div class="col-7 ">
+                <div class="numbers ">
                   <p>Oven</p>
                   {{usage3}} kwH
                 </div>
@@ -73,8 +73,8 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <card class="card-body">
+      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+        <card class="card-body flex-fill ">
           <div>
             <div class="row">
               <div class="col-5">

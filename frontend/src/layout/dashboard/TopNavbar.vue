@@ -55,19 +55,19 @@
                 </p>
               </a>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
+                <a href="#" class="nav-item dropdown-item">The water bill for the month is ready</a>
               </li>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
+                <a href="#" class="nav-item dropdown-item">You have 1 unpaid bill</a>
               </li>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
+                <a href="#" class="nav-item dropdown-item">The total consumption is 30% lesser compared to previous month. Good Job!</a>
               </li>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Another notification</a>
+                <a href="#" class="nav-item dropdown-item">Do you know that you can save more electricity if you use the fan?</a>
               </li>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Another one</a>
+                <a href="#" class="nav-item dropdown-item">Remember to switch off unused appliances!</a>
               </li>
             </base-dropdown>
             <base-dropdown tag="li"
