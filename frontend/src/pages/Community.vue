@@ -1,6 +1,15 @@
 <template>
   <div class="row">
     <div class="col-12">
+      <button type='button' class='btn btn-large'>+</button>
+      <Modal show='true'>
+        <template v-slot:header>
+        Upload a New Post
+          </template>
+          <textarea rows='4' cols='50' v-model='posttext'></textarea>
+          <template v-slot:close-button></template>
+          <button type='button' onclick='addPost()'>Submit Post</button>
+      </Modal>
       <card :title="table1.title">
         <div class="table">
           <base-table
@@ -30,14 +39,16 @@
 
 <script>
 import { BaseTable } from "@/components";
+import { Modal } from "@/components"; 
 const tableColumns = ["Thread", "Username", "Replies"];
 
 export default {
   components: {
-    BaseTable
+    BaseTable, Modal
   },
   data() {
     return {
+      posttext : '', 
       table1: {
         title: "Forum Discussion",
         columns: [...tableColumns],
@@ -175,6 +186,15 @@ export default {
     },
     addone(){
       this.page += 1
+    },
+    addPost(){
+      var t = this.posttext; 
+      this.data.push({
+        id : 7, 
+        thread : t, 
+        username : angela, 
+        replies : 0
+      })
     }
   }
 };
@@ -187,5 +207,11 @@ export default {
 }
 .navigation{
   cursor: pointer;
+}
+
+.add {
+  background-color: purple;
+  
+
 }
 </style>
