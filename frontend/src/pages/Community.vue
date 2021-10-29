@@ -1,15 +1,18 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <button type='button' class='btn btn-large'>+</button>
+      <button type='button' class='btn btn-large' @click='showModal'>+</button>
+      <div v-if='xModal'>
       <Modal show='true'>
         <template v-slot:header>
         Upload a New Post
           </template>
           <textarea rows='4' cols='50' v-model='posttext'></textarea>
-          <template v-slot:close-button></template>
+          <template v-slot:close-button onclick='closeModal()'></template>
           <button type='button' onclick='addPost()'>Submit Post</button>
       </Modal>
+      </div> 
+
       <card :title="table1.title">
         <div class="table">
           <base-table
@@ -49,6 +52,7 @@ export default {
   data() {
     return {
       posttext : '', 
+      xModal : false, 
       table1: {
         title: "Forum Discussion",
         columns: [...tableColumns],
@@ -194,8 +198,11 @@ export default {
         thread : t, 
         username : angela, 
         replies : 0
-      })
-    }
+      }); 
+    }, 
+    showModal(){
+      this.xModal = true
+    }, 
   }
 };
 </script>
