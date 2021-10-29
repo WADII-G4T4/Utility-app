@@ -33,7 +33,7 @@
         </card>
       </div>
       <div class="col-xl-3">
-        <card class="card-body kpi-card">
+        <card class="card-body kpi-card pb-3">
           <div>
             <div class="row">
               <div class="col-3">
@@ -48,19 +48,19 @@
                 </div>
               </div>
             </div>
-            <div>
-              <hr />
+            <div >
+              <hr class="mb-0"/>
               <div class="stats" >
-                <a @click="elecKPI">
-                  <i class="tim-icons icon-refresh-01"></i> Updated now
-                </a>
+                <button id="elecBtn" type="button" class="btn btn-outline-success btn-sm " @click="elecKPI" disabled>
+                  <i class="tim-icons icon-refresh-01"></i> Update now
+                </button>
               </div>
             </div>
           </div>
         </card>
       </div>
       <div class="col-xl-3">
-        <card class="card-body kpi-card">
+        <card class="card-body kpi-card pb-3">
           <div>
             <div class="row">
               <div class="col-3">
@@ -76,18 +76,18 @@
               </div>
             </div>
             <div>
-              <hr />
+              <hr class="mb-0"/>
               <div class="stats">
-                <a @click="waterKPI">
-                  <i class="tim-icons icon-refresh-01"></i> Updated now
-                </a>
+                <button type="button" id="waterBtn" class="btn btn-outline-success btn-sm" @click="waterKPI" disabled>
+                  <i class="tim-icons icon-refresh-01"></i> Update now
+                </button>
               </div>
             </div>
           </div>
         </card>
       </div>
       <div class="col-xl-3">
-        <card class="card-body kpi-card">
+        <card class="card-body kpi-card pb-3">
           <div>
             <div class="row">
               <div class="col-3">
@@ -103,11 +103,11 @@
               </div>
             </div>
             <div>
-              <hr />
+              <hr class="mb-0"/>
               <div class="stats">
-                <a @click="gasKPI">
-                  <i class="tim-icons icon-refresh-01"></i> Updated now
-                </a>
+                <button type="button" id="gasBtn" class="btn btn-outline-success btn-sm" @click="gasKPI" disabled>
+                  <i class="tim-icons icon-refresh-01"></i> Update now
+                </button>
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@ export default {
         ],
         labels: monthLabels,
       };
-      this.$refs.bigChart.updateGradients(chartData);
+      //this.$refs.bigChart.updateGradients(chartData);
       this.bigBarChart.chartData = chartData;
       this.bigBarChart.activeIndex = index;
     },
@@ -429,20 +429,27 @@ export default {
       }
       else {
         this.billAmount = "$" + 0;
-        this.billMonth = "()";
+        this.billMonth = "Paid";
       }
     },
     elecKPI() {
+      document.getElementById("elecBtn").disabled = true;
+      setTimeout(function(){document.getElementById("elecBtn").disabled = false;},3000);
       var elec_list = [423, 467, 541, 392, 453];
       var random = Math.floor(Math.random() * elec_list.length);
       this.kpi1 = elec_list[random] + " kWh";
     },
     waterKPI() {
+      document.getElementById("waterBtn").disabled = true;
+      setTimeout(function(){document.getElementById("waterBtn").disabled = false;},3000);
       var water_list = [4230, 4670, 5410, 3920, 4530];
       var random = Math.floor(Math.random() * water_list.length);
       this.kpi2 = water_list[random] + " L";
+      
     },
     gasKPI() {
+      document.getElementById("gasBtn").disabled = true;
+      setTimeout(function(){document.getElementById("gasBtn").disabled = false;},3000);
       var gas_list = [270123, 284032, 210203, 252123, 192830];
       var random = Math.floor(Math.random() * gas_list.length);
       this.kpi3 =
