@@ -3,13 +3,13 @@
     <div class="col-12">
       <button type='button' class='btn btn-large' @click='showModal'>+</button>
       <div v-if='xModal'>
-      <Modal show='true'>
+      <Modal show='true' @close='closeModal()'>
         <template v-slot:header>
         Upload a New Post
           </template>
           <textarea rows='4' cols='50' v-model='posttext'></textarea>
-          <template v-slot:close-button onclick='closeModal()'></template>
-          <button type='button' onclick='addPost()'>Submit Post</button>
+          <template v-slot:close-button></template>
+          <button type='button' @click='addPost()'>Submit Post</button>
       </Modal>
       </div> 
 
@@ -203,6 +203,9 @@ export default {
     showModal(){
       this.xModal = true
     }, 
+    closeModal(){
+      this.xModal = false
+    }
   }
 };
 </script>
