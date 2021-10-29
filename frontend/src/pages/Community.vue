@@ -1,7 +1,10 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <button type='button' class='btn btn-large' @click='showModal'>+</button>
+
+
+      <card :title="table1.title">
+              <button type='button' class='btn btn-large' @click='showModal'>+</button>
       <div v-if='xModal'>
       <Modal show='true' @close='closeModal()'>
         <template v-slot:header>
@@ -12,8 +15,6 @@
           <button type='button' @click='addPost()'>Submit Post</button>
       </Modal>
       </div> 
-
-      <card :title="table1.title">
         <div class="table">
           <base-table
             :data="posts"
