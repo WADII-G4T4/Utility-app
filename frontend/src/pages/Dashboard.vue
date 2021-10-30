@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div v-if="!isLoading" class="loader">
-      <vue-simple-spinner message="Please wait while we retrieve your data"></vue-simple-spinner>
-      <br>
-    </div>
     <div class="row">
       <div class="col-xl-3">
         <card class="card-body kpi-card">
