@@ -24,15 +24,7 @@ import i18n from "./i18n"
 import './registerServiceWorker'
 import Spinner from 'vue-simple-spinner'
 import VueLoadingButton from 'vue-loading-button'
-import 'dtoaster/dist/dtoaster.css'
-import DToaster from 'dtoaster'
-import ToasterPresets from './json/toast_presets.json' //Your predefined toasts presets (optionally)
 
-Vue.use(DToaster, {
-  presets: ToasterPresets,
-  position: 'top-right', //toasts container position on the screen
-  containerOffset: '45px', //toasts container offset from top/bottom of the screen
-})
 Vue.component( 'vue-recaptcha', VueRecaptcha)
 Vue.component('vue-simple-spinner', Spinner)
 Vue.component('vue-loading-button', VueLoadingButton)
