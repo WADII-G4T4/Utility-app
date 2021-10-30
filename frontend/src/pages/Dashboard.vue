@@ -457,11 +457,11 @@ export default {
     },
   },
   async mounted() {
-    
+    this.isLoading = true;
     this.getBillMonth();
     const token = window.localStorage.getItem("token")
     try {
-      this.isLoading = true;
+      
       const result = await API.stripe(token);
       this.calBill(result.data.extracted);      
       this.setBigChartData(result.data.extracted);
@@ -485,7 +485,6 @@ export default {
 .loader{
   position: absolute;
   top: 250%;
-  left: 37%;
 }
 @media screen and (max-width: 1800px) {
   .kpi-card {

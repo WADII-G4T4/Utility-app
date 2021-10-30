@@ -81,5 +81,13 @@ API.stripeadd = async (data, token) => {
     return await axios.post(`${origin}/stripe/add`, data, setHeader(token))
 }
 
+API.addPost = async (data, token) => {
+    return await axios.post(`${origin}/add/post`, data, setHeader(token))
+}
+
+API.findPost = async (token) => {
+    return await axios.get(`${origin}/find/post`, setHeader(token))
+}
+
 
 export default API;
