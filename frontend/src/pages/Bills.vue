@@ -17,7 +17,6 @@
       </card>
     </div>
   </div>
-  <!-- <button class="btn btn-primary" @click="stripe">TEST</button> -->
 </template>
 
 <script>

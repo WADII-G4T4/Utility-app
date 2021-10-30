@@ -74,7 +74,8 @@ import API from '../api/API'
         window.localStorage.getItem("token")
         item.paid = true
         var count = 0
-        for (var arr of this.data){
+        var data = this.data.slice().reverse()
+        for (var arr of data){
           
           if (arr.name == item.name){
             break
@@ -82,6 +83,7 @@ import API from '../api/API'
           count += 1
           
         }
+        console.log(count)
         try {
           const result = API.stripeupdate({count}, token)
         } catch (error) {

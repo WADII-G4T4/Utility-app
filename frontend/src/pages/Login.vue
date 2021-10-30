@@ -76,7 +76,7 @@ export default {
         try {
           const res = await API.signin(data);
           const { token } = res.data;
-
+          
           window.localStorage.setItem("token", token);
           this.$router.push("/home/dashboard");
         } catch (error) {
@@ -87,6 +87,7 @@ export default {
       }
     },
     verify(response) {
+      this.isLoading = false;
       this.recaptcha = response;
     }
   }
