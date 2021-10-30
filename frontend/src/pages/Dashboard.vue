@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div v-if="!isLoading" class="loader">
-      <vue-simple-spinner message="Please wait while we retrieve your data"></vue-simple-spinner>
-      <br>
-    </div>
     <div class="row">
       <div class="col-xl-3">
         <card class="card-body kpi-card">
@@ -458,11 +454,11 @@ export default {
     },
   },
   async mounted() {
-    
+    this.isLoading = true;
     this.getBillMonth();
     const token = window.localStorage.getItem("token")
     try {
-      this.isLoading = true;
+      
       const result = await API.stripe(token);
       this.calBill(result.data.extracted);      
       this.setBigChartData(result.data.extracted);
@@ -486,7 +482,6 @@ export default {
 .loader{
   position: absolute;
   top: 250%;
-  left: 37%;
 }
 @media screen and (max-width: 1800px) {
   .kpi-card {
