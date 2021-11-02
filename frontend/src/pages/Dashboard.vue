@@ -20,9 +20,9 @@
             <div>
               <hr />
               <div class="stats">
-                <a>
+                <span>
                   Updated as of {{currTime}}
-                </a>
+                </span>
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
             <div >
               <hr class="mb-0"/>
               <div class="stats" >
-                <button id="elecBtn" type="button" class="btn btn-outline-success btn-sm " @click="elecKPI" disabled>
+                <button id="elecBtn" type="button" class="btn btn-outline-success btn-sm" :disabled="elecDis" @click="elecKPI" >
                   <i class="tim-icons icon-refresh-01"></i> Update now
                 </button>
               </div>
@@ -74,7 +74,7 @@
             <div>
               <hr class="mb-0"/>
               <div class="stats">
-                <button type="button" id="waterBtn" class="btn btn-outline-success btn-sm" @click="waterKPI" disabled>
+                <button type="button" id="waterBtn" class="btn btn-outline-success btn-sm" :disabled="waterDis" @click="waterKPI">
                   <i class="tim-icons icon-refresh-01"></i> Update now
                 </button>
               </div>
@@ -101,7 +101,7 @@
             <div>
               <hr class="mb-0"/>
               <div class="stats">
-                <button type="button" id="gasBtn" class="btn btn-outline-success btn-sm" @click="gasKPI" disabled>
+                <button type="button" id="gasBtn" class="btn btn-outline-success btn-sm" :disabled="gasDis" @click="gasKPI">
                   <i class="tim-icons icon-refresh-01"></i> Update now
                 </button>
               </div>
@@ -239,6 +239,9 @@ export default {
   },
   data() {
     return {
+      elecDis: true,
+      waterDis: true,
+      gasDis: true,
       isLoading: false,
       currTime: "",
       bills: "",
@@ -429,23 +432,23 @@ export default {
       }
     },
     elecKPI() {
-      document.getElementById("elecBtn").disabled = true;
-      setTimeout(function(){document.getElementById("elecBtn").disabled = false;},3000);
+      this.elecDis = true;
+      setTimeout(() => this.elecDis = null, 3000);
       var elec_list = [423, 467, 541, 392, 453];
       var random = Math.floor(Math.random() * elec_list.length);
       this.kpi1 = elec_list[random] + " kWh";
     },
     waterKPI() {
-      document.getElementById("waterBtn").disabled = true;
-      setTimeout(function(){document.getElementById("waterBtn").disabled = false;},3000);
+      this.waterDis = true;
+      setTimeout(() => this.waterDis = null, 3000);
       var water_list = [4230, 4670, 5410, 3920, 4530];
       var random = Math.floor(Math.random() * water_list.length);
       this.kpi2 = water_list[random] + " L";
       
     },
     gasKPI() {
-      document.getElementById("gasBtn").disabled = true;
-      setTimeout(function(){document.getElementById("gasBtn").disabled = false;},3000);
+      this.gasDis = true;
+      setTimeout(() => this.gasDis = null, 3000);
       var gas_list = [270123, 284032, 210203, 252123, 192830];
       var random = Math.floor(Math.random() * gas_list.length);
       this.kpi3 =
