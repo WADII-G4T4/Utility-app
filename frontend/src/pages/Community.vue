@@ -10,10 +10,10 @@
             </button>
           </div>
         </template>
-        <div v-if="xModal">
+        <div v-if="xModal" class='text-light'>
           <modal
             :show.sync="xModal"
-            class="modal-search"
+            class="modal-search "
             id="searchModal"
             :centered="false"
             :show-close="true"
@@ -22,8 +22,8 @@
               Upload a New Post
             </template>
             <div class="form-floating">
-              <textarea
-                class="form-control border-dark border rounded-1"
+              <textarea 
+                class="form-control border-dark border rounded-1 text-light"
                 placeholder="Leave your post here"
                 v-model="posttext"
                 id="floatingTextarea"
@@ -254,6 +254,7 @@ export default {
 
 .modal .modal-dialog {
   margin-bottom: 5cm !important;
+  
 }
 
 .add {

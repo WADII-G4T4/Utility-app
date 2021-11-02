@@ -10,7 +10,7 @@
 
       <div class="modal-dialog"
            :class="[{'modal-notice': type === 'notice'}, {'modal-dialog-centered': centered}, modalClasses]">
-        <div class="modal-content" :class="[gradient ? `bg-gradient-${gradient}` : '',modalContentClasses]">
+        <div class="modal-content bg-dark" :class="[gradient ? `bg-gradient-${gradient}` : '',modalContentClasses]">
 
           <div class="modal-header" :class="[headerClasses]" v-if="$slots.header">
             <slot name="header"></slot>

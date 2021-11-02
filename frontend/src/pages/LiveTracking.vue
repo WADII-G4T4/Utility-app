@@ -1,6 +1,26 @@
 <template>
 
   <div>
+    <div v-if="xModal">
+          <modal class="my-modal"
+            :show.sync="xModal"
+            :centered="false"
+            :show-close="true"
+          >
+            <template v-slot:header class='bg-gradient-dark'>
+              
+            </template>
+              <h2 class='text-success'>This is the Live Tracking Page</h2>
+
+            <h4>Under this page, you will be able to view your utility at real time.</h4>
+            
+            <br>
+            <h4 class='text-primary'>Click anywhere to continue </h4>
+                      
+            <template v-slot:close-button>
+            </template>
+          </modal>
+           </div>
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
         <card class="card-body flex-fill">
@@ -218,6 +238,7 @@ import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
 import config from "@/config";
+import { Modal } from "@/components";
 
 
 
@@ -227,9 +248,11 @@ export default {
     BarChart,
     TaskList,
     UserTable,
+    Modal
   },
   data() {
     return {
+      xModal: false,
       randomData:[],
       smallrandomData:[],
       smallrandomData2:[],
@@ -611,12 +634,17 @@ export default {
       }, 2000);
 
       
+    }, 
+    showModal() {
+      this.xModal = true;
+    },
+    closeModal() {
+      this.xModal = false;
     }
-
-
 
   },
   mounted() {
+    this.xModal = true
     this.i18n = this.$i18n;
     this.getRandomDatapoints();
     this.getRandomDatapointssmall();
@@ -647,4 +675,8 @@ export default {
 };
 </script>
 <style>
+
+  .my-modal{
+    text-align: center;
+  }
 </style>
