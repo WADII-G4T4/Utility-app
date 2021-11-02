@@ -27,6 +27,7 @@ import './registerServiceWorker'
 import Spinner from 'vue-simple-spinner'
 import VueLoadingButton from 'vue-loading-button'
 
+
 Vue.component( 'vue-recaptcha', VueRecaptcha)
 Vue.component('vue-simple-spinner', Spinner)
 Vue.component('vue-loading-button', VueLoadingButton)
