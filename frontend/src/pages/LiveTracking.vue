@@ -22,7 +22,7 @@
           </modal>
            </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+      <div class="col-xl-3 col-md-12 d-flex">
         <card class="card-body flex-fill">
           <div>
             <div class="row">
@@ -48,7 +48,7 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+      <div class="col-xl-3 col-md-12 d-flex">
         <card class="card-body flex-fill">
           <div>
             <div class="row">
@@ -71,7 +71,7 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 d-flex" >
+      <div class="col-xl-3 col-md-12 d-flex" >
         <card class="card-body flex-fill" >
           <div>
             <div class="row">
@@ -94,7 +94,7 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+      <div class="col-xl-3 col-md-12 d-flex">
         <card class="card-body flex-fill ">
           <div>
             <div class="row">
@@ -160,7 +160,7 @@
     </div>
     <div class="row">
 <!-- first mini line graph -->
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-xl-4 col-md-12" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t("dashboard.electricityBreakdown") }}</h5>
@@ -183,7 +183,7 @@
 
     <!-- second mini line graph -->
 
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-xl-4 col-md-12" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t("dashboard.waterBreakdown") }}</h5>
@@ -206,7 +206,7 @@
 
 <!-- third mini line graph-->
 
-      <div class="col-lg-4" :class="{ 'text-right': isRTL }">
+      <div class="col-xl-4 col-md-12" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t("dashboard.gasBreakdown") }}</h5>
